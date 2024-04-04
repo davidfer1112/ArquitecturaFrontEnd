@@ -1,4 +1,5 @@
 import Header from "../../components/Header-component/heder-component"
+import Footer from "../../components/Footer-component/footer-component"
 
 const Home = () => (
   <section className="Home">
@@ -52,6 +53,8 @@ const Home = () => (
     
     <p>La Segunda Guerra Mundial dejó un saldo de más de 60 millones de muertos, incluyendo civiles y militares, y causó enormes destrucciones materiales en todo el mundo. También tuvo consecuencias políticas, sociales y económicas de gran alcance, incluyendo el surgimiento de las Naciones Unidas y el inicio de la Guerra Fría entre Estados Unidos y la Unión Soviética.</p>
   </main>
+
+  <Footer />
 
   </section>
 )
