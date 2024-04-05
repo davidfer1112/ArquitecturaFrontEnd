@@ -42,8 +42,9 @@ const Footer = () => {
   	 				        <a href="#"><i className="fab fa-instagram"></i></a>
   	 				        <a href="#"><i className="fab fa-linkedin-in"></i></a>
   	 			        </div>
-  	 		        </div>
+  	 		        </div>				
   	 	        </div>
+				<p>Ilustraciones por <a href="https://storyset.com/shopping">Storyset</a></p>
   	        </div>
         </footer>
     )

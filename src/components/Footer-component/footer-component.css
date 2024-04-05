@@ -2,11 +2,24 @@
 	box-sizing: border-box;
 }
 
-.container{
+.footer .container{
 	max-width: 1170px;
 	margin:auto;
 }
-.row{
+
+.footer .container p{
+	margin: 0;
+	padding-left: 15px;
+	padding-top: 10px;
+	color: #ffffff;
+}
+
+.footer .container p a{
+	text-decoration: none;
+	color: #409E8D;
+}
+
+.footer .row{
 	display: flex;
 	flex-wrap: wrap;
 }
@@ -93,5 +106,10 @@ ul{
     align-content: flex-start;
     margin-left: 10%;
   }
+
+  .footer .container p{
+	margin: 0;
+	padding-left: 50px;
+ }
 
 }
