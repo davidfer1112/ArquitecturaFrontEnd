@@ -1,34 +1,65 @@
 import Header from "../../components/Header-component/heder-component"
 import Footer from "../../components/Footer-component/footer-component"
+import Producto from "../../components/Producto-component/producto-component"
 import Compra from "../../assets/images/Compra.svg"
 import "./home.css"
 
-const Home = () => (
-  <section className="Home">
-    <Header />
+const Home = () => {
 
-    <section className="sectionHome">
-      <div className="info-inicial">
-        <h1>¡Descubre los productos más populares en nuestra tienda en línea!</h1>
-        <p>Explora nuestra amplia selección de productos y encuentra lo que necesitas.</p>
-        <div className="botones-inicial">
-          <button>Comprar</button>
-          <button>Más información</button>
+  return (
+    <>
+      <Header />
+
+      {/*Info inicial */}
+      <section className="section-home">
+        <div className="info-inicial">
+          <h1>¡Descubre los productos más populares en nuestra tienda en línea!</h1>
+          <p>Explora nuestra amplia selección de productos y encuentra lo que necesitas.</p>
+          <div className="botones-inicial">
+            <button>Comprar</button>
+            <button>Más información</button>
+          </div>
         </div>
-      </div>
-      <div className="imagen-inicial">
-        <img src={Compra} alt="" />
-      </div>
-      
-    </section>
+        <div className="imagen-inicial">
+          <img src={Compra} alt="" />
+        </div>
+      </section>
+
+      {/*Productos*/}
+      <section className="section-home-proctos">
+
+        <div className="encabezado-producto">
+          <h1>Productos</h1>
+          <p>
+            Explora nuestra amplia selección de productos con imágenes, 
+            descripciones y precios para una compra fácil.
+          </p>
+        </div>
+
+        <div className="procutos-home">
+
+          <Producto/>
+          <Producto/>
+          <Producto/>
+          <Producto/>
+          <Producto/>
+          <Producto/>
+
+        </div>
+
+
+
+      </section>
+
 
     
 
     
-  <Footer />
+      <Footer />
+    </>
+  )
 
-  </section>
-)
+}
 
 export default Home
 

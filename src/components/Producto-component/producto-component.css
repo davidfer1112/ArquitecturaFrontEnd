@@ -1,0 +1,49 @@
+.container-producto {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container-producto img{
+    width: 300px;
+    height: 350px;
+}
+
+.container-producto button{
+    width: 300px;
+    height: 50px;
+    border-radius: 16px;
+    border: 2.5px solid #409E8D;
+    cursor: pointer;
+    background: transparent;
+    transition-duration: 0.8s;
+}
+.container-producto button:hover{
+    
+    border: 2.5px solid #409E8D;
+    background: #409E8D;
+    color: white;
+    transform: scale(1.1);
+}
+
+.descripcion-procucto{
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    gap: 30px;
+}
+
+.descripcion-procucto h2,p{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.descripcion-procucto p{
+    font-size: 15px;
+}
+
+.descripcion-procucto h2{
+    font-size: 18px;
+}
