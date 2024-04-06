@@ -1,18 +1,22 @@
-import "./producto-component.css"
-import procuto from "../../assets/images/Procducto.svg"
+import React from 'react';
+import "./producto-component.css";
 
-const Producto = () => {
+// Asume que esta interfaz está definida en el mismo archivo o impórtala si está definida en otro lugar
+interface ProductoProps {
+  imagenUrl: string;
+}
+
+const Producto: React.FC<ProductoProps> = ({ imagenUrl }) => {
     return (
         <div className="container-producto">
-            <img src={procuto} alt="Imagen genérica"/>
+            <img src={imagenUrl} alt="Imagen genérica"/>
             <div className="descripcion-procucto">
                 <h2>Nombre del producto</h2>
                 <p>precios</p>
             </div>
             <button>Agregar al carrito</button>
         </div>
-    )
+    );
 }
 
 export default Producto;
-

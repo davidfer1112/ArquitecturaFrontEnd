@@ -2,6 +2,7 @@ import Header from "../../components/Header-component/heder-component"
 import Footer from "../../components/Footer-component/footer-component"
 import Producto from "../../components/Producto-component/producto-component"
 import Compra from "../../assets/images/Compra.svg"
+import ProductoImg from "../../assets/images/Procducto.svg"
 import "./home.css"
 
 const Home = () => {
@@ -38,12 +39,12 @@ const Home = () => {
 
         <div className="procutos-home">
 
-          <Producto/>
-          <Producto/>
-          <Producto/>
-          <Producto/>
-          <Producto/>
-          <Producto/>
+          <Producto imagenUrl={Compra}/>
+          <Producto imagenUrl={ProductoImg}/>
+          <Producto imagenUrl={Compra}/>
+          <Producto imagenUrl={ProductoImg}/>
+          <Producto imagenUrl={Compra}/>
+          <Producto imagenUrl={ProductoImg}/>
 
         </div>
 
