@@ -12,6 +12,12 @@
     z-index: 1;
 }
 
+#boton-logo{
+    width: 300px;
+    background: transparent;
+    border: none;
+}
+
 .header .logo {
     width: 200px;
     height: auto;

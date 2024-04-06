@@ -20,10 +20,17 @@ const Header = () => {
     const irAProductos = () => {
         navigate('/Productos');
     }
+    const irAHome = () => {
+        navigate('/');
+    }
 
     return(
 <header className="header">
-        <img src={Logo} alt="Logo Mi Portal"  className="logo"/>
+
+        <button id="boton-logo" onClick={irAHome}>
+            <img src={Logo} alt="Logo Mi Portal"  className="logo"/>
+        </button>
+        
             
         
         <div className="nav-botones">

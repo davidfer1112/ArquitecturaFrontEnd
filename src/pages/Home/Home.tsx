@@ -8,6 +8,8 @@ import "./home.css"
 
 const Home = () => {
 
+  
+
   let navigate = useNavigate();
 
     const irAProductos = () => {
