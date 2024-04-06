@@ -33,6 +33,14 @@
     transition-duration: 0.5s;
 }
 
+.nav-botones ul li button {
+    text-decoration: none;
+    color: #409E8D;
+    transition-duration: 0.5s;
+    font-size: 16px;
+}
+
+
 .nav-botones ul li:hover {
     scale: 1.1;
     /* transform: translateY(-2px); */

@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useNavigate } from 'react-router-dom';
 import Logo from "../../assets/images/Logo.svg"
 import carrito from "../../assets/images/carrito.svg" 
 import User from "../../assets/images/User.svg"
@@ -14,6 +15,12 @@ const Header = () => {
 
     const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
+    let navigate = useNavigate();
+
+    const irAProductos = () => {
+        navigate('/Productos');
+    }
+
     return(
 <header className="header">
         <img src={Logo} alt="Logo Mi Portal"  className="logo"/>
@@ -21,7 +28,7 @@ const Header = () => {
         
         <div className="nav-botones">
             <ul>
-                <li><a href="/">Productos</a></li>
+                <li><button onClick={irAProductos}>Ver Productos</button></li>
                 <li><a href="/">About</a></li>
                 <li><a href="/">Contact</a></li>
             </ul>

@@ -12,7 +12,7 @@ const Producto: React.FC<ProductoProps> = ({ imagenUrl }) => {
             <img src={imagenUrl} alt="Imagen genérica"/>
             <div className="descripcion-procucto">
                 <h2>Nombre del producto</h2>
-                <p>precios</p>
+                <p>55$</p>
             </div>
             <button>Agregar al carrito</button>
         </div>

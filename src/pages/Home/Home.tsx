@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import Header from "../../components/Header-component/heder-component"
 import Footer from "../../components/Footer-component/footer-component"
 import Producto from "../../components/Producto-component/producto-component"
@@ -6,6 +7,12 @@ import ProductoImg from "../../assets/images/Procducto.svg"
 import "./home.css"
 
 const Home = () => {
+
+  let navigate = useNavigate();
+
+    const irAProductos = () => {
+        navigate('/Productos');
+    }
 
   return (
     <>
@@ -17,7 +24,7 @@ const Home = () => {
           <h1>¡Descubre los productos más populares en nuestra tienda en línea!</h1>
           <p>Explora nuestra amplia selección de productos y encuentra lo que necesitas.</p>
           <div className="botones-inicial">
-            <button>Comprar</button>
+            <button onClick={irAProductos}>Comprar</button>
             <button>Más información</button>
           </div>
         </div>
