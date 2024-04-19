@@ -25,14 +25,14 @@ const Productos = () => {
                 </div>
 
                 <div className="view-productos">
-                    <ProductosVenta imagenUrl={FondoTienda}/>
                     <ProductosVenta imagenUrl={ProductoIMG}/>
                     <ProductosVenta imagenUrl={Compra}/>
-                    <ProductosVenta imagenUrl={FondoTienda}/>
                     <ProductosVenta imagenUrl={ProductoIMG}/>
                     <ProductosVenta imagenUrl={Compra}/>
-                    <ProductosVenta imagenUrl={FondoTienda}/>
                     <ProductosVenta imagenUrl={ProductoIMG}/>
+                    <ProductosVenta imagenUrl={Compra}/>
+                    <ProductosVenta imagenUrl={ProductoIMG}/>
+                    <ProductosVenta imagenUrl={Compra}/>
                 </div>
 
                 <div className="boton-muestra">
