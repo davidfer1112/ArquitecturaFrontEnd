@@ -1,0 +1,202 @@
+@import url('https://fonts.googleapis.com/css?family=Abril+Fatcara|Lato');
+
+.fondo {
+  background: #0D0D0D;
+  width: 100%;
+  height: 100vh;
+}
+
+
+.fondo .container {
+  margin: 0 auto;
+  position: relative;
+  width: 250px;
+  height: 250px;
+  margin-top: -40px;
+}
+
+.fondo .fantasma,
+.fondo .fantasma-copia {
+  width: 50%;
+  height: 53%;
+  left: 25%;
+  top: 10%;
+  position: absolute;
+  border-radius: 50% 50% 0 0;
+  background: #EDEDED;
+  border: 1px solid #BFC0C0;
+  border-bottom: none;
+  animation: float 2s ease-out infinite;
+}
+
+.fondo .fantasma-copia {
+  z-index: 0;
+}
+
+.fondo .cara {
+  position: absolute;
+  width: 100%;
+  height: 60%;
+  top: 20%;
+}
+
+.fondo .ojo,
+.fondo .ojo-derecho {
+  position: absolute;
+  background: #585959; 
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  top: 40%;
+}
+
+.fondo .ojo {
+  left: 25%;
+}
+
+.fondo .ojo-derecho {
+  right: 25%;
+}
+
+.fondo .boca {
+  position: absolute;
+  top: 50%;
+  left: 45%;
+  width: 10px;
+  height: 10px;
+  border: 3px solid transparent #585959 #585959 transparent;
+  border-radius: 50%;
+  transform: rotate(45deg);
+}
+
+.fondo .uno,
+.fondo .dos,
+.fondo .tres,
+.fondo .cuatro {
+  position: absolute;
+  background: #EDEDED;
+  top: 85%;
+  width: 25%;
+  height: 23%;
+  border: 1px solid #BFC0C0;
+  z-index: 0;
+}
+
+.fondo .uno {
+  border-radius: 0 0 100% 30%;
+  left: -1px;
+}
+
+.fondo .dos {
+  left: 23%;
+  border-radius: 0 0 50% 50%;
+}
+
+.fondo .tres {
+  left: 50%;
+  border-radius: 0 0 50% 50%;
+}
+
+.fondo .cuatro {
+  left: 74.5%;
+  border-radius: 0 0 30% 100%;
+}
+
+.fondo .sombra {
+  position: absolute;
+  width: 30%;
+  height: 7%;
+  background: #BFC0C0;
+  left: 35%;
+  top: 80%;
+  border-radius: 50%;
+  animation: scale 2s infinite;
+}
+
+@keyframes scale {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+  50% {
+     transform: translateY(15px);
+  }
+}
+
+.fondo .boton {
+  margin-top: 10px;
+}
+
+
+.fondo h1 {
+  font-family: 'Abril Fatcara', serif;
+  color: #EDEDED;
+  text-align: center;
+  font-size: 9em;
+  margin: 0;
+  padding-top: 100px;
+  text-shadow: -1px 0 #BFC0C0, 0 1px #BFC0C0, 1px 0 #BFC0C0, 0 -1px #BFC0C0;
+}
+
+.fondo h3 {
+  font-family: 'Lato', sans-serif;
+  font-size: 2em;
+  text-transform: uppercase;
+  text-align: center;
+  color: #BFC0C0;
+  margin-top: -20px;
+  font-weight: 900;
+}
+
+.fondo p {
+  text-align: center;
+  font-family: 'Lato', sans-serif;
+  color: #585959;
+  font-size: 0.9em;
+  text-transform: uppercase;
+}
+
+
+.fondo .botones {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+
+
+
+.fondo .btn {
+  background: #EDEDED;
+  padding: 15px 20px;
+  margin-top: 15px;
+  margin-bottom: 14px;
+  color: #585959;
+  font-family: 'Lato', sans-serif;
+  text-transform: uppercase;
+  font-size: 0.9em;
+  letter-spacing: 1px;
+  border: 0;
+}
+
+.fondo .btn:hover {
+  background: #BFC0C0;
+  transition: all 0.4s ease-out;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  
+  .fondo .btn {
+    margin: 0;
+  }
+  
+}
