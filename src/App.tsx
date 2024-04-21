@@ -1,7 +1,8 @@
 import './App.css';
 import { BrowserRouter, Route, Routes} from 'react-router-dom';
 import Home from './pages/Home/home.tsx';
-import Error404 from './pages/Page-not-found/page-not-found.tsx'; 
+import Error404 from './pages/Page-not-found/page-not-found.tsx';
+import Productos from './pages/Productos/productos.tsx'; 
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='*' element={<Error404 />} /> {/* Captura todas las rutas no definidas */}
+          <Route path='/Productos' element={<Productos/>}/>
         </Routes>
       </BrowserRouter>
     </div>
