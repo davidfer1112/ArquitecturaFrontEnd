@@ -1,11 +1,14 @@
 import { useState } from "react"
+import { SessionProvider, LoginButton, useSession} from "@inrupt/solid-ui-react";
 import { useNavigate } from 'react-router-dom';
 import Logo from "../../assets/images/Logo.svg"
 import carrito from "../../assets/images/carrito.svg" 
 import User from "../../assets/images/User.svg"
 import Menu from "../../assets/images/Menu.svg"
 import Back from "../../assets/images/Back.svg"
+import LogOut from "../../assets/images/LogOut.svg"
 import "./header-component.css"
+
 
 
 
@@ -24,6 +27,10 @@ const Header = () => {
         navigate('/');
     }
 
+    const { session} = useSession();
+
+    const webId = session.info.webId;
+
     return(
 <header className="header">
 
@@ -39,9 +46,25 @@ const Header = () => {
                 <li><a href="/">About</a></li>
                 <li><a href="/">Contact</a></li>
             </ul>
-            <button className="">
-                <img src={User} alt="user" />
-            </button>
+            {webId ? (
+                <button onClick={() => { session.logout(); window.location.reload(); }}>
+                    <img src={LogOut} alt="LogOut" />
+                </button>
+            ) : (
+                <button className="">
+                    <SessionProvider sessionId="some-id">
+                        <LoginButton
+                            oidcIssuer="https://solidcommunity.net/"
+                            redirectUrl={window.location.origin + "/Productos"}
+                            onError={console.error}
+                        >
+                            <img src={User} alt="user" />
+                        </LoginButton>
+                    </SessionProvider>
+                </button>
+            )}
+            {/* <p>{webId}</p> */}     
+
             <button className="">
                 <img src={carrito} alt="carrito" />
             </button>
