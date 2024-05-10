@@ -1,6 +1,6 @@
 import './App.css';
 import { BrowserRouter, Route, Routes} from 'react-router-dom';
-import Home from './pages/Home/home.tsx';
+import Home from './pages/Home/Home';
 import Error404 from './pages/Page-not-found/page-not-found.tsx';
 import Productos from './pages/Productos/productos.tsx'; 
 

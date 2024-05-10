@@ -20,7 +20,7 @@ import Footer from "../../components/Footer-component/footer-component";
 import Producto from "../../components/Producto-component/producto-component";
 import Compra from "../../assets/images/Compra.svg";
 import ProductoImg from "../../assets/images/Procducto.svg";
-import "./home.css";
+import "./Home.css";
 
 // URL del vocabulario VCARD, para uso en los datos
 const VCARD = "http://www.w3.org/2006/vcard/ns#";
