@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSession, CombinedDataProvider, Text } from "@inrupt/solid-ui-react";
 import { fetch as solidFetch } from '@inrupt/solid-client-authn-browser';
@@ -19,7 +19,6 @@ import Header from "../../components/Header-component/heder-component";
 import Footer from "../../components/Footer-component/footer-component";
 import Producto from "../../components/Producto-component/producto-component";
 import Compra from "../../assets/images/Compra.svg";
-import ProductoImg from "../../assets/images/Procducto.svg";
 import "./Home.css";
 
 // URL del vocabulario VCARD, para uso en los datos
@@ -125,6 +124,23 @@ const Home = () => {
   const [userData, setUserData] = useState(null);
   const { session } = useSession();
   const webId = session.info.webId;
+  const [productos, setProductos] = useState([]);
+
+  const fetchProductos = async () => {
+    try {
+      const response = await fetch('http://localhost:5064/products');
+      const data = await response.json();
+      setProductos(data);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchProductos();
+  }, []);
+  
+
 
   const irAProductos = () => {
     navigate('/Productos');
@@ -210,13 +226,15 @@ const Home = () => {
           <h1>Productos</h1>
           <p>Explora nuestra amplia selección de productos con imágenes, descripciones y precios para una compra fácil.</p>
         </div>
-        <div className="procutos-home">
-          <Producto imagenUrl={Compra}/>
-          <Producto imagenUrl={ProductoImg}/>
-          <Producto imagenUrl={Compra}/>
-          <Producto imagenUrl={ProductoImg}/>
-          <Producto imagenUrl={Compra}/>
-          <Producto imagenUrl={ProductoImg}/>
+        <div className="productos-home">
+          {productos.slice(0,6).map(producto => (
+            <Producto
+              key={producto.productId}
+              imagenUrl={producto.imageUrl}
+              nombre={producto.productName}
+              precio={producto.price}
+            />
+          ))}
         </div>
         
       </section>
