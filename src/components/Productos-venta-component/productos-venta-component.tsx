@@ -1,24 +1,22 @@
 
+import React from 'react';
+import { ProductModel } from '../../models/ProductModel';
 import './productos-venta-component.css';
 
-interface ProductoProps {
-    imagenUrl: string;
-}
+const ProductosVenta: React.FC<{ producto: ProductModel }> = ({ producto }) => {
+    const precioFormateado = producto.price.toLocaleString();
 
-const ProductosVenta: React.FC<ProductoProps> = ({ imagenUrl }) => {
     return (
         <div className='container-producto-venta'>
             <button>
-                <img src={imagenUrl} alt="" />  
+                <img src={producto.imageUrl} alt={producto.productName} />
             </button>
-
             <div className='info-producto-venta'>
-                <h3>Producto</h3>
-                <p>$00.00</p>
+                <h3>{producto.productName}</h3>
+                <p>${precioFormateado}</p>
             </div>
-            
         </div>
-    )
+    );
 }
 
 export default ProductosVenta;

@@ -2,12 +2,27 @@
 import Header from "../../components/Header-component/heder-component"
 import Footer from "../../components/Footer-component/footer-component"
 import ProductosVenta from "../../components/Productos-venta-component/productos-venta-component"
-import FondoTienda from "../../assets/images/fondo-tienda.jpg"
-import ProductoIMG from '../../assets/images/Procducto.svg';
-import Compra from "../../assets/images/Compra.svg"
 import "./productos.css"
+import { useEffect, useState } from "react";
+import { ProductModel } from "../../models/ProductModel";
 
 const Productos = () => {
+
+    const [productos, setProductos] = useState<ProductModel[]>([]);
+
+    const fetchProductos = async () => {
+        try {
+            const response = await fetch('http://localhost:5064/products'); 
+            const data = await response.json();
+            setProductos(data);
+        } catch (error) {
+            console.error('Error fetching products:', error);
+        }
+    };
+
+    useEffect(() => {
+        fetchProductos();
+    }, []);
 
     return(
         <>
@@ -20,19 +35,17 @@ const Productos = () => {
 
             <section className="muestra-productos">
                 <div className="procutos-titulos">
-                    <h2>Productos</h2>
+                    <h2>Nuestra Colección</h2>
                     <p>Explora nuestra amplia selección de productos disponibles.</p>
                 </div>
 
                 <div className="view-productos">
-                    <ProductosVenta imagenUrl={ProductoIMG}/>
-                    <ProductosVenta imagenUrl={Compra}/>
-                    <ProductosVenta imagenUrl={ProductoIMG}/>
-                    <ProductosVenta imagenUrl={Compra}/>
-                    <ProductosVenta imagenUrl={ProductoIMG}/>
-                    <ProductosVenta imagenUrl={Compra}/>
-                    <ProductosVenta imagenUrl={ProductoIMG}/>
-                    <ProductosVenta imagenUrl={Compra}/>
+                    {productos.map(producto => (
+                        <ProductosVenta
+                            key={producto.productId}
+                            producto={producto}  // Pasa todo el objeto de producto
+                     />
+                    ))}
                 </div>
 
                 <div className="boton-muestra">

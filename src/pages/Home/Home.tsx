@@ -134,7 +134,7 @@ const Home = () => {
 
       <section className="section-home-proctos">
         <div className="encabezado-producto">
-          <h1>Productos</h1>
+          <h1>Nuestra Colección</h1>
           <p>Explora nuestra amplia selección de productos con imágenes, descripciones y precios para una compra fácil.</p>
         </div>
         <div className="productos-home">
