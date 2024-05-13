@@ -12,9 +12,11 @@ import {
   createThing,
   buildThing,
   saveSolidDatasetAt,
-  setStringNoLocale,
+  // setStringNoLocale,
   setThing  
 } from '@inrupt/solid-client';
+import { UserDataModel } from '../../models/UserDataModel';
+import { ProductModel } from '../../models/ProductModel';
 import Header from "../../components/Header-component/heder-component";
 import Footer from "../../components/Footer-component/footer-component";
 import Producto from "../../components/Producto-component/producto-component";
@@ -36,10 +38,22 @@ const UserProfile = () => {
   );
 }
 
-async function fetchUserData(webId) {
+async function fetchUserData(webId: string) {
   try {
     const myDataset = await getSolidDataset(webId);
+    
+    if (!myDataset) {
+      console.error("El conjunto de datos es nulo");
+      return null;
+    }
+
     const profile = getThing(myDataset, webId);
+    
+    if (!profile) {
+      console.error("El perfil es nulo");
+      return null;
+    }
+
     const name = getStringNoLocale(profile, 'http://www.w3.org/2006/vcard/ns#fn');
     console.log('Nombre obtenido:', name);  
     return name;
@@ -49,7 +63,7 @@ async function fetchUserData(webId) {
   }
 }
 
-async function fetchContainerContents(containerUrl) {
+async function fetchContainerContents(containerUrl: string) {
   try {
     const dataset = await getSolidDataset(containerUrl);
     const contents = getContainedResourceUrlAll(dataset);
@@ -61,7 +75,7 @@ async function fetchContainerContents(containerUrl) {
   }
 }
 
-async function createFolder(containerUrl) {
+async function createFolder(containerUrl: string): Promise<boolean> {
   try {
     // Intenta crear el contenedor usando el cliente HTTP autenticado
     await createContainerAt(containerUrl, { fetch: solidFetch });
@@ -73,7 +87,7 @@ async function createFolder(containerUrl) {
   }
 }
 
-async function createUserData(containerUrl, userData) {
+async function createUserData(containerUrl: string, userData: UserDataModel):Promise<boolean> {
   try {
     let dataset = createSolidDataset();
     let profile = buildThing(createThing({ name: "profile" }))
@@ -100,14 +114,22 @@ async function createUserData(containerUrl, userData) {
   }
 }
 
-async function fetchUserDataFromPod(fileUrl) {
+async function fetchUserDataFromPod(fileUrl: string): Promise<UserDataModel | null>{
   try {
     const dataset = await getSolidDataset(fileUrl, { fetch: solidFetch });
     const profile = getThing(dataset, fileUrl + "#profile"); 
 
+    if (!profile) {
+      return null;
+    }
+
     const name = getStringNoLocale(profile, VCARD + "fn");
     const address = getStringNoLocale(profile, VCARD + "hasAddress");
     const email = getStringNoLocale(profile, VCARD + "hasEmail");
+
+    if (!name || !address || !email) {
+      return null;
+    }
 
     return { name, address, email };
   } catch (error) {
@@ -119,12 +141,16 @@ async function fetchUserDataFromPod(fileUrl) {
 
 const Home = () => {
   let navigate = useNavigate();
-  const [userName, setUserName] = useState('');
-  const [containerContents, setContainerContents] = useState([]);
-  const [userData, setUserData] = useState(null);
   const { session } = useSession();
   const webId = session.info.webId;
-  const [productos, setProductos] = useState([]);
+  const [userData, setUserData] = useState<UserDataModel | null>(null);
+  const [productos, setProductos] = useState<ProductModel[]>([]);
+  const [containerContents, setContainerContents] = useState<string[]>([]);
+  const [userName, setUserName] = useState<string | null>(null);
+
+  
+
+  
 
   const fetchProductos = async () => {
     try {
@@ -149,13 +175,13 @@ const Home = () => {
   const handleFetchUserData = async () => {
     if (webId) {
       const name = await fetchUserData(webId);
-      setUserName(name);
+      setUserName(name || '');
     }
   };
 
   const fetchContents = async () => {
     if (session.info.isLoggedIn) {
-      const containerUrl = session.info.webId.replace('profile/card#me', 'public/'); 
+      const containerUrl = session.info?.webId ? session.info.webId.replace('profile/card#me', 'public/') : '';
       console.log('URL del contenedor:', containerUrl);  
       const contents = await fetchContainerContents(containerUrl);
       setContainerContents(contents || []);
@@ -164,7 +190,7 @@ const Home = () => {
 
   const handleCreateFolder = async () => {
     if (session.info.isLoggedIn) {
-      const baseUrl = webId.replace('profile/card#me', ''); // Obtener la base URL del POD
+      const baseUrl = webId ? webId.replace('profile/card#me', ''): ''; // Obtener la base URL del POD
       const containerUrl = `${baseUrl}public/miportal/`; // URL del nuevo contenedor
       const result = await createFolder(containerUrl);
       if (result) {
@@ -179,7 +205,7 @@ const Home = () => {
 
   const handleCreateUserData = async () => {
     if (session.info.isLoggedIn) {
-      const baseUrl = webId.replace('profile/card#me', ''); // Obtener la base URL del POD
+      const baseUrl = webId ? webId.replace('profile/card#me', ''): ''; // Obtener la base URL del POD
       const containerUrl = `${baseUrl}public/miportal/`; // URL del nuevo contenedor
       const userData = {
         name: "Juan Pérez",
@@ -194,10 +220,10 @@ const Home = () => {
 
   const handleLoadUserData = async () => {
     if (session.info.isLoggedIn) {
-      const baseUrl = webId.replace('profile/card#me', '');
+      const baseUrl = webId ? webId.replace('profile/card#me', '') : '';
       const fileUrl = `${baseUrl}public/miportal/userData.ttl`;
       const data = await fetchUserDataFromPod(fileUrl);
-      setUserData(data);
+      setUserData(data ? { name: data.name || '', address: data.address || '', email: data.email || '' } : null);
     } else {
       alert('Usuario no autenticado');
     }
