@@ -20,7 +20,6 @@ const Header = () => {
     useEffect(() => {
         if (session && session.info && session.info.isLoggedIn) {
             setIsLoggedIn(true);
-            navigate('/');
         } else {
             setIsLoggedIn(false);
         }
