@@ -1,18 +1,17 @@
-
-import Header from "../../components/Header-component/heder-component"
-import Footer from "../../components/Footer-component/footer-component"
-import ProductosVenta from "../../components/Productos-venta-component/productos-venta-component"
-import "./productos.css"
-import { useEffect, useState } from "react";
-import { ProductModel } from "../../models/ProductModel";
+import React, { useEffect, useState } from "react";
+import Header from "../../components/Header-component/heder-component";
+import Footer from "../../components/Footer-component/footer-component";
+import ProductosVenta from "../../components/Productos-venta-component/productos-venta-component";
+import "./productos.css";
+import { DetailedProductModel } from "../../models/DeatailedProductModel";
 
 const Productos = () => {
-
-    const [productos, setProductos] = useState<ProductModel[]>([]);
+    const [productos, setProductos] = useState<DetailedProductModel[]>([]);
+    const [categoriaSeleccionada, setCategoriaSeleccionada] = useState<string>('');
 
     const fetchProductos = async () => {
         try {
-            const response = await fetch('http://localhost:5064/products'); 
+            const response = await fetch('http://localhost:5064/products');
             const data = await response.json();
             setProductos(data);
         } catch (error) {
@@ -24,13 +23,49 @@ const Productos = () => {
         fetchProductos();
     }, []);
 
-    return(
+    const productosFiltrados = categoriaSeleccionada
+        ? productos.filter(producto => producto.category.categoryName === categoriaSeleccionada)
+        : productos;
+
+    // Extraer categorías únicas
+    const categorias = Array.from(new Set(productos.map(p => p.category.categoryName)));
+
+    return (
         <>
             <Header />
 
             <section className="inicio-productos">
                 <h1>Explora nuestra selección de productos</h1>
                 <p>Descubre una amplia gama de productos de alta calidad.</p>
+            </section>
+
+            <section className="filtro-productos">
+                <h2>Categorias</h2>
+                <div className="radio-input">
+                    <input 
+                        type="radio" 
+                        id="todas" 
+                        name="categoria-radio" 
+                        value="" 
+                        checked={categoriaSeleccionada === ''}
+                        onChange={() => setCategoriaSeleccionada('')}
+                    />
+                    <label htmlFor="todas">Todas</label>
+                    
+                    {categorias.map(categoria => (
+                        <React.Fragment key={categoria}>
+                            <input 
+                                type="radio" 
+                                id={categoria} 
+                                name="categoria-radio" 
+                                value={categoria} 
+                                checked={categoriaSeleccionada === categoria}
+                                onChange={() => setCategoriaSeleccionada(categoria)}
+                            />
+                            <label htmlFor={categoria}>{categoria}</label>
+                        </React.Fragment>
+                    ))}
+                </div>
             </section>
 
             <section className="muestra-productos">
@@ -40,11 +75,11 @@ const Productos = () => {
                 </div>
 
                 <div className="view-productos">
-                    {productos.map(producto => (
+                    {productosFiltrados.map(producto => (
                         <ProductosVenta
                             key={producto.productId}
-                            producto={producto}  // Pasa todo el objeto de producto
-                     />
+                            producto={producto}
+                        />
                     ))}
                 </div>
 
