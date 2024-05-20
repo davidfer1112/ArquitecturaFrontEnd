@@ -29,6 +29,7 @@ const Header = () => {
 
     const irAProductos = () => navigate('/Productos');
     const irAHome = () => navigate('/');
+    const irAConfiguracion = () => navigate('/configuracion');
 
     return (
         <header className="header">
@@ -46,13 +47,14 @@ const Header = () => {
                         <button className="">
                             <img src={carrito} alt="carrito" />
                         </button>
-                        <button className="">
+                        <button className="" onClick={irAConfiguracion}>
                             <img src={Config} alt="configuraciones" />
                         </button>
                         <button onClick={() => { 
                             session.logout(); 
                             setIsLoggedIn(false); 
-                            window.location.reload(); 
+                            window.location.reload();
+                            irAHome();
                         }}>
                             <img src={LogOut} alt="LogOut" />
                         </button>

@@ -107,7 +107,7 @@ const Home = () => {
     if (session.info.isLoggedIn) {
       const baseUrl = webId ? webId.replace('profile/card#me', '') : '';
       const fileUrl = `${baseUrl}public/miportal/userData.ttl`;
-      const data = await fetchUserDataFromPod(fileUrl);
+      const data = await fetchUserDataFromPod(fileUrl, session);
       setUserData(data ? { name: data.name || '', address: data.address || '', email: data.email || '' } : null);
     } else {
       alert('Usuario no autenticado');
