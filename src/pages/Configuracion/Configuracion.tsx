@@ -76,35 +76,58 @@ const Configuracion = () => {
 
       <section className="section-configuracion">
         <h1>Configuración del Usuario</h1>
-        
-        
+
         {userData && !editing && (
-          <div className='datos-usuarios'>
+          <div className="user-info">
             <p>Nombre: {userData.name}</p>
             <p>Dirección: {userData.address}</p>
             <p>Email: {userData.email}</p>
-            <button onClick={handleEdit}>Editar</button>
+            <button className="edit-button" onClick={handleEdit}>Editar</button>
           </div>
         )}
 
         {editing && (
-          <div>
-            <form>
-              <label>
-                Nombre:
-                <input type="text" name="name" value={formData.name} onChange={handleChange} />
-              </label>
-              <label>
-                Dirección:
-                <input type="text" name="address" value={formData.address} onChange={handleChange} />
-              </label>
-              <label>
-                Email:
-                <input type="email" name="email" value={formData.email} onChange={handleChange} />
-              </label>
+          <div className="form-container">
+            <form className="user-form">
+              <div className="wave-group">
+                <input required type="text" name="name" value={formData.name} onChange={handleChange} className="input" />
+                <span className="bar"></span>
+                <label className="label">
+                  <span className="label-char" style={{ "--index": 0 } as React.CSSProperties}>N</span>
+                  <span className="label-char" style={{ "--index": 1 } as React.CSSProperties}>a</span>
+                  <span className="label-char" style={{ "--index": 2 } as React.CSSProperties}>m</span>
+                  <span className="label-char" style={{ "--index": 3 } as React.CSSProperties}>e</span>
+                </label>
+              </div>
+              <div className="wave-group">
+                <input required type="text" name="address" value={formData.address} onChange={handleChange} className="input" />
+                <span className="bar"></span>
+                <label className="label">
+                  <span className="label-char" style={{ "--index": 0 } as React.CSSProperties}>A</span>
+                  <span className="label-char" style={{ "--index": 1 } as React.CSSProperties}>d</span>
+                  <span className="label-char" style={{ "--index": 2 } as React.CSSProperties}>d</span>
+                  <span className="label-char" style={{ "--index": 3 } as React.CSSProperties}>r</span>
+                  <span className="label-char" style={{ "--index": 4 } as React.CSSProperties}>e</span>
+                  <span className="label-char" style={{ "--index": 5 } as React.CSSProperties}>s</span>
+                  <span className="label-char" style={{ "--index": 6 } as React.CSSProperties}>s</span>
+                </label>
+              </div>
+              <div className="wave-group">
+                <input required type="email" name="email" value={formData.email} onChange={handleChange} className="input" />
+                <span className="bar"></span>
+                <label className="label">
+                  <span className="label-char" style={{ "--index": 0 } as React.CSSProperties}>E</span>
+                  <span className="label-char" style={{ "--index": 1 } as React.CSSProperties}>m</span>
+                  <span className="label-char" style={{ "--index": 2 } as React.CSSProperties}>a</span>
+                  <span className="label-char" style={{ "--index": 3 } as React.CSSProperties}>i</span>
+                  <span className="label-char" style={{ "--index": 4 } as React.CSSProperties}>l</span>
+                </label>
+              </div>
             </form>
-            <button onClick={handleSave}>Guardar</button>
-            <button onClick={handleCancel}>Cancelar</button>
+            <div className="botones-inicial bonton-config">
+              <button onClick={handleSave}>Guardar</button>
+              <button onClick={handleCancel}>Cancelar</button>
+            </div>
           </div>
         )}
       </section>

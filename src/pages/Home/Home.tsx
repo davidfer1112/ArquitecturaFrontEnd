@@ -150,7 +150,7 @@ const Home = () => {
         
       </section>
 
-      <UserProfile /> 
+      {/* <UserProfile /> 
 
       <button onClick={handleFetchUserData}>Mostrar datos del POD</button>
       {userName && <p>Nombre del usuario: {userName}</p>}
@@ -173,7 +173,7 @@ const Home = () => {
             <p>Dirección: {userData.address}</p>
             <p>Email: {userData.email}</p>
           </div>
-        )}
+        )} */}
 
       <Footer />
     </>
