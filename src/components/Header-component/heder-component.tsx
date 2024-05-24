@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Logo from "../../assets/images/Logo.svg";
 import carrito from "../../assets/images/carrito.svg";
 import User from "../../assets/images/User.svg";
-import Config from "../../assets/images/Config.svg"; // Agregué la imagen para configuraciones
+import Config from "../../assets/images/Config.svg"; 
 import Menu from "../../assets/images/Menu.svg";
 import Back from "../../assets/images/Back.svg";
 import LogOut from "../../assets/images/LogOut.svg";
@@ -31,6 +31,28 @@ const Header = () => {
     const irAHome = () => navigate('/');
     const irAConfiguracion = () => navigate('/configuracion');
 
+    const verificarUsuario = async () => {
+        if (!session || !session.info || !session.info.webId) {
+            console.error("Usuario no logueado o webId no disponible");
+            return;
+        }
+        
+        const webid = session.info.webId;
+        const response = await fetch('http://localhost:5064/Users/CheckOrCreate', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ webid: webid }),
+        });
+
+        if (response.ok) {
+            console.log("Verificación exitosa");
+        } else {
+            console.error("Verificación fallida");
+        }
+    };
+
     return (
         <header className="header">
             <button id="boton-logo" onClick={irAHome}>
@@ -44,7 +66,7 @@ const Header = () => {
                 </ul>
                 {isLoggedIn ? (
                     <React.Fragment>
-                        <button className="">
+                        <button className="" onClick={verificarUsuario}>
                             <img src={carrito} alt="carrito" />
                         </button>
                         <button className="" onClick={irAConfiguracion}>
@@ -60,7 +82,7 @@ const Header = () => {
                         </button>
                     </React.Fragment>
                 ) : (
-                    <button className="" onClick={irAHome}>
+                    <button className="">
                         <SessionProvider sessionId="some-id">
                             <LoginButton
                                 oidcIssuer="https://solidcommunity.net/"
