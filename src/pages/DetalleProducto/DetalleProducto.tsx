@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import toast, { Toaster } from 'react-hot-toast';
 import { DetailedProductModel } from '../../models/DeatailedProductModel'; 
 import Header from '../../components/Header-component/heder-component';
 import Footer from '../../components/Footer-component/footer-component';
@@ -27,6 +28,7 @@ const DetalleProducto = () => {
     const handleAddToCart = async () => {
         if (!session || !session.info || !session.info.webId || !producto) {
             console.error("Usuario no logueado, webId no disponible, o producto no cargado");
+            toast.error('Usuario no logueado');
             return;
         }
 
@@ -47,8 +49,10 @@ const DetalleProducto = () => {
 
         if (response.ok) {
             console.log("Producto agregado al carrito exitosamente");
+            toast.success('Producto agregado al carrito');
         } else {
             console.error("Fallo al agregar el producto al carrito");
+            toast.error('Error al agregar el producto al carrito');
         }
     };
 
@@ -83,6 +87,8 @@ const DetalleProducto = () => {
                     </div>
                 </div>
             </section>
+
+            <Toaster />
 
             <Footer />
         </div>
