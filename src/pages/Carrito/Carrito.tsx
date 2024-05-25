@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react';
 import Header from "../../components/Header-component/heder-component";
 import Footer from "../../components/Footer-component/footer-component";
 import { useSession } from "@inrupt/solid-ui-react";
-import { CartModel} from "../../models/CartModel";
+import { CartModel } from "../../models/CartModel";
 import { CartItemModel } from "../../models/CartItemModel";
+import addCarrito from "../../assets/images/addCarrito.svg";
+import toast, { Toaster } from 'react-hot-toast';
 import "./Carrito.css";
 
 const Carrito = () => {
@@ -37,6 +39,36 @@ const Carrito = () => {
         fetchCart();
     }, [session]);
 
+    const eliminarItem = async (itemId: number) => {
+        if (!session || !session.info || !session.info.webId) {
+            console.error("Usuario no logueado o webId no disponible");
+            return;
+        }
+
+        const webid = session.info.webId;
+        const response = await fetch('http://localhost:5064/Cart/Remove', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ webid: webid, itemId: itemId }),
+        });
+
+        if (response.ok) {
+            setCart(prevCart => {
+                if (!prevCart) return prevCart;
+                return {
+                    ...prevCart,
+                    cartItems: prevCart.cartItems.filter(item => item.cartItemId !== itemId)
+                };
+            });
+            console.log("Producto eliminado del carrito");
+            toast.success('Producto eliminado del carrito con éxito');
+        } else {
+            console.error("Error al eliminar el producto del carrito");
+        }
+    };
+
     if (!cart) {
         return <div>Cargando...</div>;
     }
@@ -54,24 +86,37 @@ const Carrito = () => {
             <Header />
             <div className="carrito-container">
                 <h1>Carrito de Compras</h1>
-                <div className="carrito-items">
-                    {cart.cartItems.map((item: CartItemModel) => (
-                        <div key={item.cartItemId} className="carrito-item">
-                            <img src={item.product.imageUrl} alt={item.product.productName} />
-                            <div className="carrito-item-info">
-                                <h2>{item.product.productName}</h2>
-                                <p>Precio unitario: {formatearPrecio(item.product.price)}</p>
-                                <p>Cantidad: {item.quantity}</p>
-                                <p>Subtotal: {formatearPrecio(item.product.price * item.quantity)}</p>
-                            </div>
+                {cart.cartItems.length === 0 ? (
+                    <div className="carrito-vacio">
+                        <img src={addCarrito} alt="Carrito vacío" className="imagen-carrito-vacio" />
+                        <h2>Aún no hay productos. Sigue comprando.</h2>
+                    </div>
+                ) : (
+                    <>
+                        <div className="carrito-items">
+                            {cart.cartItems.map((item: CartItemModel) => (
+                                <div key={item.cartItemId} className="carrito-item">
+                                    <img src={item.product.imageUrl} alt={item.product.productName} />
+                                    <div className="carrito-item-info">
+                                        <h2>{item.product.productName}</h2>
+                                        <p>Precio unitario: {formatearPrecio(item.product.price)}</p>
+                                        <p>Cantidad: {item.quantity}</p>
+                                        <p>Subtotal: {formatearPrecio(item.product.price * item.quantity)}</p>
+                                        <button onClick={() => eliminarItem(item.cartItemId)} className="eliminar-button">
+                                            Eliminar
+                                        </button>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
-                    ))}
-                </div>
-                <div className="carrito-total">
-                    <h2>Total: {formatearPrecio(calcularTotal())}</h2>
-                    <button className="pagar-button">Pagar</button>
-                </div>
+                        <div className="carrito-total">
+                            <h2>Total: {formatearPrecio(calcularTotal())}</h2>
+                            <button className="pagar-button">Pagar</button>
+                        </div>
+                    </>
+                )}
             </div>
+            <Toaster />
             <Footer />
         </>
     );

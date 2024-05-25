@@ -51,3 +51,31 @@
 .pagar-button:hover {
     background-color: #45a049;
 }
+
+.carrito-vacio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-top: 50px;
+}
+
+.imagen-carrito-vacio {
+    width: 450px;
+    height: auto;
+}
+
+.eliminar-button {
+    background-color: #f44336;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.eliminar-button:hover {
+    background-color: #d32f2f;
+}
