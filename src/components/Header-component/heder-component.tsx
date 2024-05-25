@@ -58,7 +58,7 @@ const Header = () => {
     return (
         <header className="header">
             <button id="boton-logo" onClick={irAHome}>
-                <img src={Logo} alt="Logo Mi Portal" className="logo"/>
+                <img src={Logo} alt="Logo Mi Portal" className="logo-miportal"/>
             </button>
             <div className="nav-botones">
                 <ul>

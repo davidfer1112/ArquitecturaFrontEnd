@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from "../../components/Header-component/heder-component";
 import Footer from "../../components/Footer-component/footer-component";
 import { useSession } from "@inrupt/solid-ui-react";
@@ -11,6 +12,7 @@ import "./Carrito.css";
 const Carrito = () => {
     const [cart, setCart] = useState<CartModel | null>(null);
     const { session } = useSession();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchCart = async () => {
@@ -81,6 +83,10 @@ const Carrito = () => {
         return precio.toLocaleString('es-ES', { style: 'currency', currency: 'COP' });
     };
 
+    const handlePagar = () => {
+        navigate('/confirmar-pago', { state: { cart, totalAmount: calcularTotal() } });
+    };
+
     return (
         <>
             <Header />
@@ -111,7 +117,7 @@ const Carrito = () => {
                         </div>
                         <div className="carrito-total">
                             <h2>Total: {formatearPrecio(calcularTotal())}</h2>
-                            <button className="pagar-button">Pagar</button>
+                            <button className="pagar-button" onClick={handlePagar}>Pagar</button>
                         </div>
                     </>
                 )}
