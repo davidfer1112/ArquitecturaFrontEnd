@@ -1,4 +1,3 @@
-// Importar dependencias necesarias
 import { fetch as solidFetch, Session } from '@inrupt/solid-client-authn-browser';
 import {
   getSolidDataset,
@@ -11,31 +10,31 @@ import {
   buildThing,
   saveSolidDatasetAt,
   setThing,
+  getFile,
+  overwriteFile,
 } from '@inrupt/solid-client';
 import { UserDataModel } from '../../models/UserDataModel';
 
-// URL del vocabulario VCARD, para uso en los datos
 export const VCARD = "http://www.w3.org/2006/vcard/ns#";
 
-// Funciones exportadas
 export async function fetchUserData(webId: string): Promise<string | null> {
   try {
     const myDataset = await getSolidDataset(webId, { fetch: solidFetch });
-    
+
     if (!myDataset) {
       console.error("El conjunto de datos es nulo");
       return null;
     }
 
     const profile = getThing(myDataset, webId);
-    
+
     if (!profile) {
       console.error("El perfil es nulo");
       return null;
     }
 
     const name = getStringNoLocale(profile, VCARD + 'fn');
-    console.log('Nombre obtenido:', name);  
+    console.log('Nombre obtenido:', name);
     return name;
   } catch (error) {
     console.error("Error al obtener datos:", error);
@@ -47,7 +46,7 @@ export async function fetchContainerContents(containerUrl: string): Promise<stri
   try {
     const dataset = await getSolidDataset(containerUrl, { fetch: solidFetch });
     const contents = getContainedResourceUrlAll(dataset);
-    console.log('Contenidos del contenedor:', contents);  
+    console.log('Contenidos del contenedor:', contents);
     return contents;
   } catch (error) {
     console.error("Error al obtener los contenidos del contenedor:", error);
@@ -71,8 +70,8 @@ export async function createUserData(containerUrl: string, userData: UserDataMod
     let dataset = createSolidDataset();
     let profile = buildThing(createThing({ name: "profile" }))
       .addStringNoLocale(VCARD + "fn", userData.name)
-      .addStringNoLocale(VCARD + "hasAddress", userData.address)
-      .addStringNoLocale(VCARD + "hasEmail", userData.email)
+      .addStringNoLocale(VCARD + "Address", userData.address)
+      .addStringNoLocale(VCARD + "Email", userData.email)
       .build();
 
     dataset = setThing(dataset, profile);
@@ -92,15 +91,15 @@ export async function createUserData(containerUrl: string, userData: UserDataMod
 export async function fetchUserDataFromPod(fileUrl: string, session: Session): Promise<UserDataModel | null> {
   try {
     const dataset = await getSolidDataset(fileUrl, { fetch: session.fetch });
-    const profile = getThing(dataset, fileUrl + "#profile"); 
+    const profile = getThing(dataset, fileUrl + "#profile");
 
     if (!profile) {
       return null;
     }
 
     const name = getStringNoLocale(profile, VCARD + "fn");
-    const address = getStringNoLocale(profile, VCARD + "hasAddress");
-    const email = getStringNoLocale(profile, VCARD + "hasEmail");
+    const address = getStringNoLocale(profile, VCARD + "Address");
+    const email = getStringNoLocale(profile, VCARD + "Email");
 
     if (!name || !address || !email) {
       return null;
@@ -116,15 +115,15 @@ export async function fetchUserDataFromPod(fileUrl: string, session: Session): P
 export const updateUserDataInPod = async (fileUrl: string, data: UserDataModel, session: Session): Promise<boolean> => {
   try {
     const dataset = await getSolidDataset(fileUrl, { fetch: session.fetch });
-    let thing = getThing(dataset, fileUrl + "#profile"); 
+    let thing = getThing(dataset, fileUrl + "#profile");
     if (!thing) {
       thing = createThing({ name: "profile" });
     }
 
     const updatedThing = buildThing(thing)
       .setStringNoLocale(VCARD + "fn", data.name)
-      .setStringNoLocale(VCARD + "hasAddress", data.address)
-      .setStringNoLocale(VCARD + "hasEmail", data.email)
+      .setStringNoLocale(VCARD + "Address", data.address)
+      .setStringNoLocale(VCARD + "Email", data.email)
       .build();
 
     const updatedDataset = setThing(dataset, updatedThing);
@@ -135,3 +134,44 @@ export const updateUserDataInPod = async (fileUrl: string, data: UserDataModel, 
     return false;
   }
 };
+
+export const createUserDataFileInPod = async (fileUrl: string, data: UserDataModel, session: Session): Promise<boolean> => {
+  const turtleData = `
+    @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+    <#profile> a vcard:Person;
+      vcard:fn "${data.name}";
+      vcard:hasAddress "${data.address}";
+      vcard:hasEmail "${data.email}".
+  `;
+
+  try {
+    await overwriteFile(fileUrl, new Blob([turtleData], { type: 'text/turtle' }), { contentType: 'text/turtle', fetch: session.fetch });
+    return true;
+  } catch (error) {
+    console.error('Error al crear el archivo de datos del usuario:', error);
+    return false;
+  }
+};
+
+export async function ensureUserDataFile(fileUrl: string, session: Session): Promise<UserDataModel | null> {
+  try {
+    await getFile(fileUrl, { fetch: session.fetch });
+    return await fetchUserDataFromPod(fileUrl, session);
+  } catch (error) {
+    if (error instanceof Error && error.message.includes("404")) {
+      const initialData = {
+        name: '',
+        address: '',
+        email: ''
+      };
+
+      const created = await createUserDataFileInPod(fileUrl, initialData, session);
+      if (created) {
+        return initialData;
+      }
+    } else {
+      console.error('Error al verificar el archivo de datos del usuario:', error);
+    }
+  }
+  return null;
+}

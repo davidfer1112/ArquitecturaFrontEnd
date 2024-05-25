@@ -1,13 +1,14 @@
 // Configuracion.tsx
 import React, { useState, useEffect } from 'react';
 import { useSession } from "@inrupt/solid-ui-react";
+import toast, { Toaster } from 'react-hot-toast';
 import {
-  fetchUserDataFromPod,
-  updateUserDataInPod
+  updateUserDataInPod,
+  ensureUserDataFile 
 } from '../../components/PodsComponent/PodsComponent';
 import { UserDataModel } from '../../models/UserDataModel';
 import Header from "../../components/Header-component/heder-component";
-import Footer from "../../components/Footer-component/footer-component";
+import Footer from '../../components/Footer-component/footer-component';
 import "./Configuracion.css";
 
 const Configuracion = () => {
@@ -26,7 +27,9 @@ const Configuracion = () => {
       const loadUserData = async () => {
         const baseUrl = webId.replace('profile/card#me', '');
         const fileUrl = `${baseUrl}public/miportal/userData.ttl`;
-        const data = await fetchUserDataFromPod(fileUrl, session);
+
+        // Verifica si el archivo existe y si no, créalo
+        const data = await ensureUserDataFile(fileUrl, session);
         setUserData(data ? { name: data.name || '', address: data.address || '', email: data.email || '' } : null);
       };
       loadUserData();
@@ -61,14 +64,16 @@ const Configuracion = () => {
       if (result) {
         setUserData(formData);
         setEditing(false);
-        alert('Datos actualizados con éxito');
+        toast.success('Usuario actualizado exitosamente');
       } else {
-        alert('Error al actualizar los datos');
+        toast.error('Error al actualizar el usuario');
       }
     } else {
       alert('Usuario no autenticado');
     }
   };
+
+  const isEmptyData = !userData || (!userData.name && !userData.address && !userData.email);
 
   return (
     <>
@@ -77,7 +82,14 @@ const Configuracion = () => {
       <section className="section-configuracion">
         <h1>Configuración del Usuario</h1>
 
-        {userData && !editing && (
+        {isEmptyData && !editing && (
+          <div className="user-info">
+            <p>Primera vez?</p>
+            <button className="edit-button" onClick={handleEdit}>Editar</button>
+          </div>
+        )}
+
+        {userData && !isEmptyData && !editing && (
           <div className="user-info">
             <p>Nombre: {userData.name}</p>
             <p>Dirección: {userData.address}</p>
@@ -131,6 +143,7 @@ const Configuracion = () => {
           </div>
         )}
       </section>
+      <Toaster />
 
       <Footer />
     </>
