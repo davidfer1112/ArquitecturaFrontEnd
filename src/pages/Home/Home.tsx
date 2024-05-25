@@ -144,6 +144,7 @@ const Home = () => {
               imagenUrl={producto.imageUrl}
               nombre={producto.productName}
               precio={producto.price}
+              productId={producto.productId}
             />
           ))}
         </div>
