@@ -30,6 +30,7 @@ const Header = () => {
     const irAProductos = () => navigate('/Productos');
     const irAHome = () => navigate('/');
     const irAConfiguracion = () => navigate('/configuracion');
+    const irACarrito = () => navigate('/carrito');
 
     const verificarUsuario = async () => {
         if (!session || !session.info || !session.info.webId) {
@@ -48,6 +49,7 @@ const Header = () => {
 
         if (response.ok) {
             console.log("Verificación exitosa");
+            irACarrito();
         } else {
             console.error("Verificación fallida");
         }

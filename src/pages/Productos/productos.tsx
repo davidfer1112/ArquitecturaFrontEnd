@@ -83,9 +83,9 @@ const Productos = () => {
                     ))}
                 </div>
 
-                <div className="boton-muestra">
+                {/* <div className="boton-muestra">
                     <button>Ver más</button>
-                </div>
+                </div> */}
             </section>
 
             <Footer />
