@@ -86,7 +86,7 @@ const ConfirmarPago = () => {
             OrderDetails: orderDetails
         };
 
-        const response = await fetch('https://miportalnetcore.onrender.com/Orders', {
+        const response = await fetch('https://miportalnetcore-ra6b.onrender.com/Orders', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -98,7 +98,7 @@ const ConfirmarPago = () => {
             toast.success("Orden creada con éxito");
 
             // Limpiar el carrito después de crear la orden exitosamente
-            const clearCartResponse = await fetch('https://miportalnetcore.onrender.com/Cart/Clear', {
+            const clearCartResponse = await fetch('https://miportalnetcore-ra6b.onrender.com/Cart/Clear', {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',

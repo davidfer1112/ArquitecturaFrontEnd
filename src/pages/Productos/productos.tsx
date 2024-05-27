@@ -8,10 +8,12 @@ import { DetailedProductModel } from "../../models/DeatailedProductModel";
 const Productos = () => {
     const [productos, setProductos] = useState<DetailedProductModel[]>([]);
     const [categoriaSeleccionada, setCategoriaSeleccionada] = useState<string>('');
+    const [recomendaciones, setRecomendaciones] = useState<number[]>([]);
+    const [productosRecomendados, setProductosRecomendados] = useState<DetailedProductModel[]>([]);
 
     const fetchProductos = async () => {
         try {
-            const response = await fetch('https://miportalnetcore.onrender.com/products');
+            const response = await fetch('https://miportalnetcore-ra6b.onrender.com/products');
             const data = await response.json();
             setProductos(data);
         } catch (error) {
@@ -19,15 +21,44 @@ const Productos = () => {
         }
     };
 
+    const fetchRecomendaciones = async () => {
+        try {
+            const webId = "https://arqui.solidcommunity.net/profile/card#me"; // reemplaza esto con el webId real del usuario
+            const response = await fetch('https://recomendaciones-arqui-axaj.onrender.com/recommend', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ webid: webId }),
+            });
+            const data = await response.json();
+            setRecomendaciones(data.recommendations);
+            const recommendedProducts = await Promise.all(
+                data.recommendations.map(async (id: number) => {
+                    const productResponse = await fetch(`https://miportalnetcore-ra6b.onrender.com/products/${id}`);
+                    return await productResponse.json();
+                })
+            );
+            setProductosRecomendados(recommendedProducts);
+        } catch (error) {
+            console.error('Error fetching recommendations:', error);
+        }
+    };
+
     useEffect(() => {
-        fetchProductos();
-    }, []);
+        if (categoriaSeleccionada === 'Recomendaciones') {
+            fetchRecomendaciones();
+        } else {
+            fetchProductos();
+        }
+    }, [categoriaSeleccionada]);
 
-    const productosFiltrados = categoriaSeleccionada
-        ? productos.filter(producto => producto.category.categoryName === categoriaSeleccionada)
-        : productos;
+    const productosFiltrados = categoriaSeleccionada === 'Recomendaciones'
+        ? productosRecomendados
+        : categoriaSeleccionada
+            ? productos.filter(producto => producto.category.categoryName === categoriaSeleccionada)
+            : productos;
 
-    // Extraer categorías únicas
     const categorias = Array.from(new Set(productos.map(p => p.category.categoryName)));
 
     return (
@@ -65,6 +96,16 @@ const Productos = () => {
                             <label htmlFor={categoria}>{categoria}</label>
                         </React.Fragment>
                     ))}
+
+                    <input 
+                        type="radio" 
+                        id="recomendaciones" 
+                        name="categoria-radio" 
+                        value="Recomendaciones" 
+                        checked={categoriaSeleccionada === 'Recomendaciones'}
+                        onChange={() => setCategoriaSeleccionada('Recomendaciones')}
+                    />
+                    <label htmlFor="recomendaciones">Recomendaciones</label>
                 </div>
             </section>
 
@@ -82,10 +123,6 @@ const Productos = () => {
                         />
                     ))}
                 </div>
-
-                {/* <div className="boton-muestra">
-                    <button>Ver más</button>
-                </div> */}
             </section>
 
             <Footer />

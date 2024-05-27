@@ -98,13 +98,9 @@
 
 
 @media (max-width: 980px) {
-    
-    .section-home-proctos .procutos-home{
-        display: grid;
+
+    .section-home-proctos .productos-home{
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr 1fr 1fr;
-        margin: 40px;
-        grid-gap: 20px;
     }
 
     .encabezado-producto h1{
@@ -115,14 +111,8 @@
 
 @media (max-width: 660px) {
     
-    .section-home-proctos .procutos-home{
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: 1fr 1fr 1fr 1fr;
-        margin: 0px;
-        margin-top: 20px;
-        margin-bottom: 20px;
-        grid-gap: 20px;
+    .section-home-proctos .productos-home{
+        grid-template-columns: 1fr ;
     }
     
 }
