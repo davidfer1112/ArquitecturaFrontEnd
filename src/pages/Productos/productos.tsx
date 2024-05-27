@@ -11,7 +11,7 @@ const Productos = () => {
 
     const fetchProductos = async () => {
         try {
-            const response = await fetch('http://localhost:5064/products');
+            const response = await fetch('https://miportalnetcore.onrender.com/products');
             const data = await response.json();
             setProductos(data);
         } catch (error) {

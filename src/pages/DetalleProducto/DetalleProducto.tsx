@@ -17,7 +17,7 @@ const DetalleProducto = () => {
         if (!productId) return;
 
         const fetchProducto = async () => {
-            const response = await fetch(`http://localhost:5064/products/${productId}`);
+            const response = await fetch(`https://miportalnetcore.onrender.com/products/${productId}`);
             const data = await response.json();
             setProducto(data);
         };
@@ -39,7 +39,7 @@ const DetalleProducto = () => {
             quantity: quantity,
         };
 
-        const response = await fetch('http://localhost:5064/Cart/Add', {
+        const response = await fetch('https://miportalnetcore.onrender.com/Cart/Add', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
