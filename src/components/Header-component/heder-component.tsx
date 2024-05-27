@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Logo from "../../assets/images/Logo.svg";
 import carrito from "../../assets/images/carrito.svg";
 import User from "../../assets/images/User.svg";
-import Config from "../../assets/images/Config.svg"; // Agregué la imagen para configuraciones
+import Config from "../../assets/images/Config.svg"; 
 import Menu from "../../assets/images/Menu.svg";
 import Back from "../../assets/images/Back.svg";
 import LogOut from "../../assets/images/LogOut.svg";
@@ -20,7 +20,6 @@ const Header = () => {
     useEffect(() => {
         if (session && session.info && session.info.isLoggedIn) {
             setIsLoggedIn(true);
-            navigate('/');
         } else {
             setIsLoggedIn(false);
         }
@@ -30,11 +29,36 @@ const Header = () => {
 
     const irAProductos = () => navigate('/Productos');
     const irAHome = () => navigate('/');
+    const irAConfiguracion = () => navigate('/configuracion');
+    const irACarrito = () => navigate('/carrito');
+
+    const verificarUsuario = async () => {
+        if (!session || !session.info || !session.info.webId) {
+            console.error("Usuario no logueado o webId no disponible");
+            return;
+        }
+        
+        const webid = session.info.webId;
+        const response = await fetch('https://miportalnetcore.onrender.com/Users/CheckOrCreate', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ webid: webid }),
+        });
+
+        if (response.ok) {
+            console.log("Verificación exitosa");
+            irACarrito();
+        } else {
+            console.error("Verificación fallida");
+        }
+    };
 
     return (
         <header className="header">
             <button id="boton-logo" onClick={irAHome}>
-                <img src={Logo} alt="Logo Mi Portal" className="logo"/>
+                <img src={Logo} alt="Logo Mi Portal" className="logo-miportal"/>
             </button>
             <div className="nav-botones">
                 <ul>
@@ -44,22 +68,23 @@ const Header = () => {
                 </ul>
                 {isLoggedIn ? (
                     <React.Fragment>
-                        <button className="">
+                        <button className="" onClick={verificarUsuario}>
                             <img src={carrito} alt="carrito" />
                         </button>
-                        <button className="">
+                        <button className="" onClick={irAConfiguracion}>
                             <img src={Config} alt="configuraciones" />
                         </button>
                         <button onClick={() => { 
                             session.logout(); 
                             setIsLoggedIn(false); 
-                            window.location.reload(); 
+                            window.location.reload();
+                            irAHome();
                         }}>
                             <img src={LogOut} alt="LogOut" />
                         </button>
                     </React.Fragment>
                 ) : (
-                    <button className="" onClick={irAHome}>
+                    <button className="">
                         <SessionProvider sessionId="some-id">
                             <LoginButton
                                 oidcIssuer="https://solidcommunity.net/"
