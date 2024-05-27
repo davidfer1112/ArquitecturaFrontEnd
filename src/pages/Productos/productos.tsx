@@ -12,6 +12,7 @@ const Productos = () => {
     const [categoriaSeleccionada, setCategoriaSeleccionada] = useState<string>('');
     const [productosRecomendados, setProductosRecomendados] = useState<DetailedProductModel[]>([]);
     const [webId, setWebId] = useState<string | null>(null);
+    const [expanded, setExpanded] = useState(false);
 
     useEffect(() => {
         if (session && session.info && session.info.webId) {
