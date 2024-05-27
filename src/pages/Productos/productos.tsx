@@ -4,11 +4,22 @@ import Footer from "../../components/Footer-component/footer-component";
 import ProductosVenta from "../../components/Productos-venta-component/productos-venta-component";
 import "./productos.css";
 import { DetailedProductModel } from "../../models/DeatailedProductModel";
+import { useSession } from "@inrupt/solid-ui-react";
 
 const Productos = () => {
+    const { session } = useSession();
     const [productos, setProductos] = useState<DetailedProductModel[]>([]);
     const [categoriaSeleccionada, setCategoriaSeleccionada] = useState<string>('');
     const [productosRecomendados, setProductosRecomendados] = useState<DetailedProductModel[]>([]);
+    const [webId, setWebId] = useState<string | null>(null);
+
+    useEffect(() => {
+        if (session && session.info && session.info.webId) {
+            setWebId(session.info.webId);
+        } else {
+            setWebId(null);
+        }
+    }, [session]);
 
     const fetchProductos = async () => {
         try {
@@ -22,7 +33,6 @@ const Productos = () => {
 
     const fetchRecomendaciones = async () => {
         try {
-            const webId = "https://arqui.solidcommunity.net/profile/card#me"; // reemplaza esto con el webId real del usuario
             const response = await fetch('https://recomendaciones-arqui-axaj.onrender.com/recommend', {
                 method: 'POST',
                 headers: {
@@ -44,12 +54,12 @@ const Productos = () => {
     };
 
     useEffect(() => {
-        if (categoriaSeleccionada === 'Recomendaciones') {
+        if (categoriaSeleccionada === 'Recomendaciones' && webId) {
             fetchRecomendaciones();
         } else {
             fetchProductos();
         }
-    }, [categoriaSeleccionada]);
+    }, [categoriaSeleccionada, webId]);
 
     const productosFiltrados = categoriaSeleccionada === 'Recomendaciones'
         ? productosRecomendados
@@ -95,15 +105,19 @@ const Productos = () => {
                         </React.Fragment>
                     ))}
 
-                    <input 
-                        type="radio" 
-                        id="recomendaciones" 
-                        name="categoria-radio" 
-                        value="Recomendaciones" 
-                        checked={categoriaSeleccionada === 'Recomendaciones'}
-                        onChange={() => setCategoriaSeleccionada('Recomendaciones')}
-                    />
-                    <label htmlFor="recomendaciones">Recomendaciones</label>
+                    {webId && (
+                        <React.Fragment>
+                            <input 
+                                type="radio" 
+                                id="recomendaciones" 
+                                name="categoria-radio" 
+                                value="Recomendaciones" 
+                                checked={categoriaSeleccionada === 'Recomendaciones'}
+                                onChange={() => setCategoriaSeleccionada('Recomendaciones')}
+                            />
+                            <label htmlFor="recomendaciones">Recomendaciones</label>
+                        </React.Fragment>
+                    )}
                 </div>
             </section>
 
