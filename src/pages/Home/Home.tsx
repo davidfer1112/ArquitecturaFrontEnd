@@ -25,7 +25,7 @@ const Home = () => {
 
   const fetchProductos = async () => {
     try {
-      const response = await fetch('https://miportalnetcore.onrender.com/products');
+      const response = await fetch('https://miportalnetcore-ra6b.onrender.com/products');
       const data = await response.json();
       setProductos(data);
     } catch (error) {

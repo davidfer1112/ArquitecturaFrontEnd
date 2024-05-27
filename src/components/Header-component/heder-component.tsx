@@ -40,7 +40,7 @@ const Header = () => {
         }
         
         const webid = session.info.webId;
-        const response = await fetch('https://miportalnetcore.onrender.com/Users/CheckOrCreate', {
+        const response = await fetch('https://miportalnetcore-ra6b.onrender.com/Users/CheckOrCreate', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

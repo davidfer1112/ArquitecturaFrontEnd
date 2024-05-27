@@ -30,7 +30,7 @@ const Producto: React.FC<ProductoProps> = ({ imagenUrl, nombre, precio, productI
             quantity: 1,
         };
 
-        const response = await fetch('https://miportalnetcore.onrender.com/Cart/Add', {
+        const response = await fetch('https://miportalnetcore-ra6b.onrender.com/Cart/Add', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
