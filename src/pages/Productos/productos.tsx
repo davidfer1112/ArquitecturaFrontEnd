@@ -8,7 +8,6 @@ import { DetailedProductModel } from "../../models/DeatailedProductModel";
 const Productos = () => {
     const [productos, setProductos] = useState<DetailedProductModel[]>([]);
     const [categoriaSeleccionada, setCategoriaSeleccionada] = useState<string>('');
-    const [recomendaciones, setRecomendaciones] = useState<number[]>([]);
     const [productosRecomendados, setProductosRecomendados] = useState<DetailedProductModel[]>([]);
 
     const fetchProductos = async () => {
@@ -32,7 +31,6 @@ const Productos = () => {
                 body: JSON.stringify({ webid: webId }),
             });
             const data = await response.json();
-            setRecomendaciones(data.recommendations);
             const recommendedProducts = await Promise.all(
                 data.recommendations.map(async (id: number) => {
                     const productResponse = await fetch(`https://miportalnetcore-ra6b.onrender.com/products/${id}`);
