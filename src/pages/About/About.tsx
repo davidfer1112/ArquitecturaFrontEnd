@@ -1,4 +1,3 @@
-import React from "react";
 import Header from "../../components/Header-component/heder-component";
 import Footer from "../../components/Footer-component/footer-component";
 import { Player } from "@lottiefiles/react-lottie-player";
