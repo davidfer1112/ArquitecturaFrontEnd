@@ -1,132 +1,242 @@
-.inicio-productos{
-    background-image: url('../../assets/images/fondo-tienda.jpg');
-    height: 300px;
-    width: 100%;
-    background-size: cover;
-    background-repeat: no-repeat;
-    padding-left: 50px;
-    border-radius: 10px;
+/* Estilos generales */
+.inicio-productos {
+  background-image: url('../../assets/images/fondo-tienda.jpg');
+  height: 300px;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding-left: 50px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.inicio-productos h1{
-    font-size: 50px;
-    color: #24262b;
-    text-shadow: 1px 1px 2px #ffffff;
-    margin: 0;
-    padding-top: 100px;
+.inicio-productos h1 {
+  font-size: 50px;
+  color: #24262b;
+  text-shadow: 1px 1px 2px #ffffff;
+  margin: 0;
 }
 
-.inicio-productos p{
-    font-size: 20px;
-    color: #24262b;
-    text-shadow: 1px 1px 2px #ffffff;
-    margin: 0;
-    padding-top: 20px;
+.inicio-productos p {
+  font-size: 20px;
+  color: #24262b;
+  text-shadow: 1px 1px 2px #ffffff;
+  margin: 0;
+  padding-top: 20px;
 }
 
-.procutos-titulos{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    flex-direction: column;
+.procutos-titulos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
 }
 
-.procutos-titulos h2{
-    font-size: 50px;
-    margin: 0;
-    padding-top: 30px;
+.procutos-titulos h2 {
+  font-size: 50px;
+  margin: 0;
+  padding-top: 30px;
 }
 
-.procutos-titulos p{
-    font-size: 20px;
-    margin: 0;
-    padding-top: 15px;
+.procutos-titulos p {
+  font-size: 20px;
+  margin: 0;
+  padding-top: 15px;
 }
 
-.view-productos{
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 20px;
-    padding: 20px;
-    z-index: -1;
+.view-productos {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px;
+  padding: 20px;
 }
 
-.filtro-productos{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 20px;
-    z-index: 1;
-    position: sticky;
-    top: 25px;
-    background-color: #F0F9FF
+.filtro-productos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  z-index: 1;
+  position: sticky;
+  top: 25px;
+  background-color: #F0F9FF;
 }
 
 .radio-input {
-    display: flex;
-    flex-direction: row;
-    font-size: 16px;
-    font-weight: 600;
-    color: black;
-  }
-  
-  .radio-input input[type="radio"] {
-    display: none;
-  }
-  
-  .radio-input label {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    border: 1px solid #ccc;
-    background-color: whitesmoke;
-    border-radius: 5px;
-    margin-right: 12px;
-    cursor: pointer;
-    position: relative;
-    transition: all 0.3s ease-in-out;
-  }
-  
-  .radio-input label:before {
-    content: "";
-    display: block;
-    position: absolute;
-    top: 50%;
-    left: 0;
-    transform: translate(-50%, -50%);
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: #fff;
-    border: 2px solid #ccc;
-    transition: all 0.3s ease-in-out;
-  }
-  
-  .radio-input input[type="radio"]:checked + label:before {
-    background-color: #409E8D;
-    top: 0;
-  }
-  
-  .radio-input input[type="radio"]:checked + label {
-    background-color: #409E8D;
-    color: #fff;
-    border-color: whitesmoke;
-    animation: radio-translate 0.5s ease-in-out;
-  }
-  
-  @keyframes radio-translate {
-    0% {
+  display: flex;
+  flex-direction: row;
+  font-size: 16px;
+  font-weight: 600;
+  color: black;
+}
+
+.radio-input input[type="radio"] {
+  display: none;
+}
+
+.radio-input label {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: whitesmoke;
+  border-radius: 5px;
+  margin-right: 12px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease-in-out;
+}
+
+.radio-input label:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #fff;
+  border: 2px solid #ccc;
+  transition: all 0.3s ease-in-out;
+}
+
+.radio-input input[type="radio"]:checked + label:before {
+  background-color: #409E8D;
+  top: 0;
+}
+
+.radio-input input[type="radio"]:checked + label {
+  background-color: #409E8D;
+  color: #fff;
+  border-color: whitesmoke;
+  animation: radio-translate 0.5s ease-in-out;
+}
+
+@keyframes radio-translate {
+  0% {
       transform: translateX(0);
-    }
-  
-    50% {
+  }
+  50% {
       transform: translateY(-10px);
-    }
-  
-    100% {
-      transform: translateX(0);
-    }
   }
-  
+  100% {
+      transform: translateX(0);
+  }
+}
+
+/* Media queries para responsividad */
+@media (max-width: 1200px) {
+  .view-productos {
+      grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .inicio-productos h1 {
+      font-size: 35px;
+  }
+
+  .inicio-productos p {
+      font-size: 18px;
+  }
+
+  .procutos-titulos h2 {
+      font-size: 35px;
+  }
+
+  .procutos-titulos p {
+      font-size: 18px;
+  }
+
+  .view-productos {
+      grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 660px) {
+  .inicio-productos {
+      padding-left: 20px;
+  }
+
+  .inicio-productos h1 {
+      font-size: 28px;
+  }
+
+  .inicio-productos p {
+      font-size: 16px;
+  }
+
+  .procutos-titulos h2 {
+      font-size: 28px;
+  }
+
+  .procutos-titulos p {
+      font-size: 16px;
+  }
+
+  .view-productos {
+      grid-template-columns: 1fr;
+  }
+
+  .radio-input {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  .radio-input label {
+      width: 100%;
+      margin-bottom: 10px;
+  }
+}
+
+/* Estilos para menú desplegable solo en móviles */
+@media (max-width: 660px) {
+  .filtro-productos {
+      position: relative;
+      background-color: transparent;
+  }
+
+  .filtro-productos h2 {
+      display: none;
+  }
+
+  .radio-input {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+  }
+
+  .filtro-productos.expanded .radio-input {
+      display: flex;
+  }
+
+  .toggle-button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      padding: 10px;
+      background-color: #409E8D;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+  }
+
+  .toggle-button:hover {
+      background-color: #367d70;
+  }
+}
+
+@media (min-width: 661px) {
+  .toggle-button {
+      display: none;
+  }
+}

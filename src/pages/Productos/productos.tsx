@@ -8,6 +8,7 @@ import { DetailedProductModel } from "../../models/DeatailedProductModel";
 const Productos = () => {
     const [productos, setProductos] = useState<DetailedProductModel[]>([]);
     const [categoriaSeleccionada, setCategoriaSeleccionada] = useState<string>('');
+    const [expanded, setExpanded] = useState(false);
 
     const fetchProductos = async () => {
         try {
@@ -39,7 +40,10 @@ const Productos = () => {
                 <p>Descubre una amplia gama de productos de alta calidad.</p>
             </section>
 
-            <section className="filtro-productos">
+            <section className={`filtro-productos ${expanded ? 'expanded' : ''}`}>
+                <button className="toggle-button" onClick={() => setExpanded(!expanded)}>
+                    {expanded ? 'Ocultar Categorías' : 'Mostrar Categorías'}
+                </button>
                 <h2>Categorias</h2>
                 <div className="radio-input">
                     <input 
@@ -91,6 +95,7 @@ const Productos = () => {
             <Footer />
         </>
     );
+
 }
 
 export default Productos;

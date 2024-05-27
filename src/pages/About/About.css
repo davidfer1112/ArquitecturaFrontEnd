@@ -1,0 +1,135 @@
+/* about.css */
+
+/* Estilos generales */
+.about-hero {
+    background-image: url('../../assets/images/fondo-tienda.jpg');
+    height: 300px;
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 50px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #24262b;
+    text-shadow: 1px 1px 2px #ffffff;
+    box-sizing: border-box;
+}
+
+.about-hero h1 {
+    font-size: 50px;
+    margin: 0;
+    text-align: center;
+}
+
+.about-hero p {
+    font-size: 20px;
+    margin: 20px 0 0 0;
+    text-align: center;
+}
+
+.about-content {
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+    box-sizing: border-box;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.about-section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    max-width: 1000px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 20px;
+}
+
+.text-content {
+    max-width: 600px;
+    text-align: left;
+    flex: 1;
+}
+
+.about-section h2 {
+    font-size: 35px;
+    margin-bottom: 10px;
+}
+
+.about-section p {
+    font-size: 18px;
+    margin: 0;
+}
+
+.about-image, .about-section .lottie-player {
+    width: 300px;
+    height: auto;
+    border-radius: 10px;
+    flex: 1;
+}
+
+/* Media queries para responsividad */
+@media (max-width: 900px) {
+    .about-hero h1 {
+        font-size: 35px;
+    }
+
+    .about-hero p {
+        font-size: 18px;
+    }
+
+    .about-section h2 {
+        font-size: 28px;
+    }
+
+    .about-section p {
+        font-size: 16px;
+    }
+
+    .about-section {
+        flex-direction: column;
+        text-align: center;
+        max-width: none;
+        padding: 0 10px;
+    }
+
+    .text-content {
+        max-width: 100%;
+    }
+
+    .about-image, .about-section .lottie-player {
+        width: 100%;
+    }
+}
+
+@media (max-width: 660px) {
+    .about-hero {
+        padding: 20px;
+    }
+
+    .about-hero h1 {
+        font-size: 28px;
+    }
+
+    .about-hero p {
+        font-size: 16px;
+    }
+
+    .about-section h2 {
+        font-size: 24px;
+    }
+
+    .about-section p {
+        font-size: 14px;
+    }
+
+    .about-section {
+        padding: 0 10px;
+    }
+}

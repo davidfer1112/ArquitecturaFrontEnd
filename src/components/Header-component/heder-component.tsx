@@ -31,6 +31,7 @@ const Header = () => {
     const irAHome = () => navigate('/');
     const irAConfiguracion = () => navigate('/configuracion');
     const irACarrito = () => navigate('/carrito');
+    const irAAbout = () => navigate('/about'); // Añadir el manejador de navegación para About
 
     const verificarUsuario = async () => {
         if (!session || !session.info || !session.info.webId) {
@@ -63,8 +64,8 @@ const Header = () => {
             <div className="nav-botones">
                 <ul>
                     <li><button onClick={irAProductos}>Ver Productos</button></li>
-                    <li><a href="/">About</a></li>
-                    <li><a href="/">Contact</a></li>
+                    <li><button onClick={irAAbout}>About</button></li> {/* Actualizar el enlace About */}
+                    <li><button onClick={() => navigate('/contact')}>Contact</button></li> {/* Actualizar el enlace Contact */}
                 </ul>
                 {isLoggedIn ? (
                     <React.Fragment>
@@ -106,9 +107,9 @@ const Header = () => {
                         <img src={Back} alt="back" />
                     </button>
                     <ul>
-                        <li><a href="/">Productos</a></li>
-                        <li><a href="/">About</a></li>
-                        <li><a href="/">Contact</a></li>
+                        <li><button onClick={irAProductos}>Productos</button></li>
+                        <li><button onClick={irAAbout}>About</button></li> {/* Actualizar el enlace About */}
+                        <li><button onClick={() => navigate('/contact')}>Contact</button></li> {/* Actualizar el enlace Contact */}
                     </ul>
                 </div>
             )}
