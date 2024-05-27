@@ -22,7 +22,7 @@ const Carrito = () => {
             }
 
             const webid = session.info.webId;
-            const response = await fetch('https://miportalnetcore.onrender.com/Cart/Get', {
+            const response = await fetch('https://miportalnetcore-ra6b.onrender.com/Cart/Get', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -48,7 +48,7 @@ const Carrito = () => {
         }
 
         const webid = session.info.webId;
-        const response = await fetch('https://miportalnetcore.onrender.com/Cart/Remove', {
+        const response = await fetch('https://miportalnetcore-ra6b.onrender.com/Cart/Remove', {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

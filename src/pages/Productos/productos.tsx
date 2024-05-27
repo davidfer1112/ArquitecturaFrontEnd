@@ -13,7 +13,7 @@ const Productos = () => {
 
     const fetchProductos = async () => {
         try {
-            const response = await fetch('https://miportalnetcore.onrender.com/products');
+            const response = await fetch('https://miportalnetcore-ra6b.onrender.com/products');
             const data = await response.json();
             setProductos(data);
         } catch (error) {
@@ -24,7 +24,7 @@ const Productos = () => {
     const fetchRecomendaciones = async () => {
         try {
             const webId = "https://arqui.solidcommunity.net/profile/card#me"; // reemplaza esto con el webId real del usuario
-            const response = await fetch('http://localhost:5000/recommend', {
+            const response = await fetch('https://recomendaciones-arqui-axaj.onrender.com/recommend', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ const Productos = () => {
             setRecomendaciones(data.recommendations);
             const recommendedProducts = await Promise.all(
                 data.recommendations.map(async (id: number) => {
-                    const productResponse = await fetch(`https://miportalnetcore.onrender.com/products/${id}`);
+                    const productResponse = await fetch(`https://miportalnetcore-ra6b.onrender.com/products/${id}`);
                     return await productResponse.json();
                 })
             );
