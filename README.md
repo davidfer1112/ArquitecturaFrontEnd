@@ -1,41 +1,61 @@
-# Ramas:
+# Mi Portal
 
-<br>
+Mi Portal es una aplicación web desarrollada como parte del proyecto de arquitectura frontend, creada por estudiantes de la Universidad Javeriana. Esta aplicación integra tecnologías como Pods e inteligencia artificial para ofrecer una experiencia de compra personalizada y eficiente.
 
-## Main: 
-Esta rama solo debe contener versiones estables de la aplicación. Se debe crear una nueva versión en la rama `main` cada vez que se publique una nueva versión de la aplicación.
+## Características
 
-## Develop: 
-Esta rama se utiliza para el desarrollo activo y la verificación del código. Los cambios se deben realizar en esta rama y luego `fusionarse en la rama main` cuando estén listos para ser publicados.
+- **Navegación Intuitiva**: Interfaz de usuario amigable y fácil de navegar.
+- **Personalización**: Recomendaciones de productos basadas en inteligencia artificial.
+- **Seguridad**: Uso de Pods para asegurar la privacidad y seguridad de los datos de los usuarios.
+- **Multiplataforma**: Diseñada para funcionar en cualquier dispositivo moderno.
 
-## Feature: 
-Esta rama se utiliza para resolver las issues que se han encontrado en la aplicación. Se debe `crear una nueva rama Feature para cada issue` y luego fusionarse en la rama develop cuando se haya resuelto la issue.
+## Tecnologías Utilizadas
 
-## Nomenclatura commits:
+- React
+- TypeScript
+- CSS
+- Fetch API para comunicación con back-end
 
+## Estructura del Proyecto
+
+El proyecto se organiza en varias carpetas principales:
+
+- `src`: Contiene el código fuente de la aplicación, incluyendo componentes, páginas y estilos.
+- `public`: Almacena archivos estáticos como el `index.html` y las imágenes.
+
+Dentro de `src`, encontrarás:
+
+- `components`: Componentes reutilizables de React.
+- `pages`: Componentes de React que representan páginas completas.
+- `assets`: Imágenes y otros recursos estáticos.
+
+## Instalación
+
+Para instalar y ejecutar Mi Portal en tu entorno local, sigue estos pasos:
+
+1. Clona el repositorio:
+
+```bash
+git clone https://github.com/davidfer1112/arquitecturafrontend.git
 ```
-  - Feature: "Feature: Nueva función"
-  - Fix: "Fix: Solución error en función"
-  - Update: "Update: Actualización en función" 
+
+2. Navega al directorio del proyecto:
+
+```bash
+cd arquitecturafrontend
 ```
 
-## Flujo de trabajo:
+3. Instala las dependencias:
+   
+```bash
+npm install
+```
 
-   1)  Se crea una nueva rama Feature para cada `nueva issue`.
-   2)  Se realizan los cambios necesarios para resolver la issue en la rama `Feature`.
-   3)  Se fusiona la rama Feature en la rama `develop`.
-   4)  Se realizan pruebas en la rama develop para `verificar` que la issue se haya resuelto correctamente.
-   5)  Se fusiona la rama develop en la rama `main`.
-   6)  Se publica una nueva versión de la aplicación desde la rama `main`.
+4. Ejecución
+Para ejecutar la aplicación en modo de desarrollo, utiliza el siguiente comando:
 
-## Revisiones de Pull Request:
+```bash
+npm start
+```
 
-Todas las solicitudes de cambios (pull requests) deben ser revisadas por al menos un revisor antes de ser fusionadas en cualquier rama. Los revisores deben asegurarse de que los cambios sean correctos y que no introduzcan ningún error nuevo en la aplicación.
-
-## Representación
-
-<div align="center">
-  <img height="300" src="https://github.com/LearnHub-Javeriana/Frontend-Electromind/assets/90224781/cd653e6c-118f-4e75-a530-4ece69c2d2ec"  />
-</div>
-
-
+Esto iniciará el servidor de desarrollo y abrirá la aplicación en tu navegador predeterminado. Si no se abre automáticamente, puedes acceder a ella visitando http://localhost:3000.
