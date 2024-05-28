@@ -64,7 +64,7 @@ const Carrito = () => {
             return;
         }
 
-        const response = await fetch('http://3.145.119.1:8080/webapp-jaxrs/api/envios/calcular', {
+        const response = await fetch('/api/webapp-jaxrs/api/envios/calcular', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -180,5 +180,5 @@ const Carrito = () => {
     );
 };
 
-export default Carrito;
 
+export default Carrito;
