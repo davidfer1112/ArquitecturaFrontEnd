@@ -7,10 +7,15 @@ import { CartModel } from "../../models/CartModel";
 import { CartItemModel } from "../../models/CartItemModel";
 import addCarrito from "../../assets/images/addCarrito.svg";
 import toast, { Toaster } from 'react-hot-toast';
+import { UserDataModel } from '../../models/UserDataModel';
+import { ensureUserDataFile } from '../../components/PodsComponent/PodsComponent';
 import "./Carrito.css";
 
 const Carrito = () => {
     const [cart, setCart] = useState<CartModel | null>(null);
+    const [costoEnvio, setCostoEnvio] = useState<number | null>(null);
+    const [distancia, setDistancia] = useState<number | null>(null);
+    const [tiempoEstimado, setTiempoEstimado] = useState<number | null>(null);
     const { session } = useSession();
     const navigate = useNavigate();
 
@@ -33,6 +38,7 @@ const Carrito = () => {
             if (response.ok) {
                 const data = await response.json();
                 setCart(data);
+                fetchCostoEnvio();
             } else {
                 console.error("Error al obtener el carrito");
             }
@@ -40,6 +46,44 @@ const Carrito = () => {
 
         fetchCart();
     }, [session]);
+
+    const fetchCostoEnvio = async () => {
+        if (!session || !session.info || !session.info.webId) {
+            console.error("Usuario no logueado o webId no disponible");
+            return;
+        }
+
+        const webid = session.info.webId;
+        const baseUrl = webid.replace('profile/card#me', '');
+        const fileUrl = `${baseUrl}public/miportal/userData.ttl`;
+
+        const userData: UserDataModel | null = await ensureUserDataFile(fileUrl, session);
+
+        if (!userData || !userData.address) {
+            console.error("Dirección de usuario no disponible");
+            return;
+        }
+
+        const response = await fetch('http://3.145.119.1:8080/webapp-jaxrs/api/envios/calcular', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                origen: "Pontificia Universidad Javeriana",
+                destino: userData.address,
+            }),
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            setCostoEnvio(data.costoEnvio);
+            setDistancia(data.distanciaEnKm);
+            setTiempoEstimado(data.tiempoEnMinutos / 60); // Convertir minutos a horas
+        } else {
+            console.error("Error al calcular el costo de envío");
+        }
+    };
 
     const eliminarItem = async (itemId: number) => {
         if (!session || !session.info || !session.info.webId) {
@@ -84,7 +128,7 @@ const Carrito = () => {
     };
 
     const handlePagar = () => {
-        navigate('/confirmar-pago', { state: { cart, totalAmount: calcularTotal() } });
+        navigate('/confirmar-pago', { state: { cart, totalAmount: calcularTotal() + (costoEnvio || 0), costoEnvio, distancia, tiempoEstimado } });
     };
 
     return (
@@ -116,7 +160,15 @@ const Carrito = () => {
                             ))}
                         </div>
                         <div className="carrito-total">
-                            <h2>Total: {formatearPrecio(calcularTotal())}</h2>
+                            <h2>Total productos: {formatearPrecio(calcularTotal())}</h2>
+                            {costoEnvio !== null && (
+                                <>
+                                    <h2>Costo de envío: {formatearPrecio(costoEnvio)}</h2>
+                                    <p>Distancia: {distancia?.toFixed(2)} km</p>
+                                    <p>Tiempo estimado: {tiempoEstimado?.toFixed(2)} horas</p> {/* Convertir minutos a horas */}
+                                </>
+                            )}
+                            <h2>Total: {formatearPrecio(calcularTotal() + (costoEnvio || 0))}</h2>
                             <button className="pagar-button" onClick={handlePagar}>Pagar</button>
                         </div>
                     </>
@@ -129,3 +181,4 @@ const Carrito = () => {
 };
 
 export default Carrito;
+
