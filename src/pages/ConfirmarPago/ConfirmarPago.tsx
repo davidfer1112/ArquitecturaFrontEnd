@@ -97,7 +97,6 @@ const ConfirmarPago = () => {
         if (response.ok) {
             toast.success("Orden creada con éxito");
 
-            // Limpiar el carrito después de crear la orden exitosamente
             const clearCartResponse = await fetch('https://miportalnetcore-ra6b.onrender.com/Cart/Clear', {
                 method: 'DELETE',
                 headers: {
@@ -123,28 +122,28 @@ const ConfirmarPago = () => {
             <div className="confirmar-pago-container">
                 <h1>Confirmar Método de Pago</h1>
                 <div className="metodos-pago">
-                    <div>
+                    <label className="custom-radio">
                         <input
                             type="radio"
-                            id="tarjeta"
                             name="metodoPago"
                             value="tarjeta"
                             checked={metodoPago === 'tarjeta'}
                             onChange={() => setMetodoPago('tarjeta')}
                         />
-                        <label htmlFor="tarjeta">Tarjeta de Crédito</label>
-                    </div>
-                    <div>
+                        <span className="radio-mark"></span>
+                        <span className="label-text">Tarjeta de Crédito</span>
+                    </label>
+                    <label className="custom-radio">
                         <input
                             type="radio"
-                            id="contraentrega"
                             name="metodoPago"
                             value="contraentrega"
                             checked={metodoPago === 'contraentrega'}
                             onChange={() => setMetodoPago('contraentrega')}
                         />
-                        <label htmlFor="contraentrega">Contra Entrega</label>
-                    </div>
+                        <span className="radio-mark"></span>
+                        <span className="label-text">Contra Entrega</span>
+                    </label>
                 </div>
 
                 {metodoPago === 'tarjeta' && (
@@ -271,27 +270,27 @@ const ConfirmarPago = () => {
                     </div>
                 )}
                 <div className={`custom-container confirmar-compra-button ${!metodoPago ? 'disabled' : ''}`} onClick={() => metodoPago && handleConfirmarCompra()}>
-  <div className="custom-left-side">
-    <div className="custom-card">
-      <div className="custom-card-line"></div>
-      <div className="custom-buttons"></div>
-    </div>
-    <div className="custom-post">
-      <div className="custom-post-line"></div>
-      <div className="custom-screen">
-        <div className="custom-dollar">$</div>
-      </div>
-      <div className="custom-numbers"></div>
-      <div className="custom-numbers-line2"></div>
-    </div>
-  </div>
-  <div className="custom-right-side">
-    <div className="custom-new">Confirmar Pago</div>
-    <svg viewBox="0 0 451.846 451.847" height="512" width="512" xmlns="http://www.w3.org/2000/svg" className="custom-arrow">
-      <path fill="#cfcfcf" d="M345.441 248.292L151.154 442.573c-12.359 12.365-32.397 12.365-44.75 0-12.354-12.354-12.354-32.391 0-44.744L278.318 225.92 106.409 54.017c-12.354-12.359-12.354-32.394 0-44.748 12.354-12.359 32.391-12.359 44.75 0l194.287 194.284c6.177 6.18 9.262 14.271 9.262 22.366 0 8.099-3.091 16.196-9.267 22.373z"></path>
-    </svg>
-  </div>
-</div>
+                    <div className="custom-left-side">
+                        <div className="custom-card">
+                            <div className="custom-card-line"></div>
+                            <div className="custom-buttons"></div>
+                        </div>
+                        <div className="custom-post">
+                            <div className="custom-post-line"></div>
+                            <div className="custom-screen">
+                                <div className="custom-dollar">$</div>
+                            </div>
+                            <div className="custom-numbers"></div>
+                            <div className="custom-numbers-line2"></div>
+                        </div>
+                    </div>
+                    <div className="custom-right-side">
+                        <div className="custom-new">Confirmar Pago</div>
+                        <svg viewBox="0 0 451.846 451.847" height="512" width="512" xmlns="http://www.w3.org/2000/svg" className="custom-arrow">
+                            <path fill="#cfcfcf" d="M345.441 248.292L151.154 442.573c-12.359 12.365-32.397 12.365-44.75 0-12.354-12.354-12.354-32.391 0-44.744L278.318 225.92 106.409 54.017c-12.354-12.359-12.354-32.394 0-44.748 12.354-12.359 32.391-12.359 44.75 0l194.287 194.284c6.177 6.18 9.262 14.271 9.262 22.366 0 8.099-3.091 16.196-9.267 22.373z"></path>
+                        </svg>
+                    </div>
+                </div>
             </div>
             <Toaster />
             <Footer />

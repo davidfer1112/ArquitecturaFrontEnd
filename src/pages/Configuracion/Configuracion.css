@@ -1,116 +1,166 @@
 .section-configuracion {
-    margin: 0 auto;
-    height: 80vh;
+  margin: 0 auto;
+  height: auto;
+  padding: 20px;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.section-configuracion h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.user-info,
+.form-container {
+  background-color: #f0f9ff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+}
+
+.user-info p {
+  margin: 5px 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.edit-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #409e8d;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 10px;
+}
+
+.edit-button:hover {
+  background-color: #367f74;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.wave-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.wave-group .input {
+  font-size: 16px;
+  padding: 10px 10px 10px 5px;
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  border: none;
+  border-bottom: 1px solid #515151;
+  background: transparent;
+}
+
+.wave-group .input:focus {
+  outline: none;
+}
+
+.wave-group .label {
+  color: #999;
+  font-size: 18px;
+  font-weight: normal;
+  position: absolute;
+  pointer-events: none;
+  left: 5px;
+  top: 10px;
+  display: flex;
+}
+
+.wave-group .label-char {
+  transition: 0.2s ease all;
+  transition-delay: calc(var(--index) * 0.05s);
+}
+
+.wave-group .input:focus ~ .label .label-char,
+.wave-group .input:valid ~ .label .label-char {
+  transform: translateY(-20px);
+  font-size: 14px;
+  color: #409e8d;
+}
+
+.wave-group .bar {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 300px;
+}
+
+.wave-group .bar:before,
+.wave-group .bar:after {
+  content: '';
+  height: 2px;
+  width: 0;
+  bottom: 1px;
+  position: absolute;
+  background: #409e8d;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+}
+
+.wave-group .bar:before {
+  left: 50%;
+}
+
+.wave-group .bar:after {
+  right: 50%;
+}
+
+.wave-group .input:focus ~ .bar:before,
+.wave-group .input:focus ~ .bar:after {
+  width: 50%;
+}
+
+.bonton-config {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  max-width: 300px;
+  margin-top: 20px;
+}
+
+.bonton-config button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #409e8d;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.bonton-config button:hover {
+  background-color: #367f74;
+}
+
+@media (max-width: 768px) {
+  .section-configuracion {
+      padding: 10px;
   }
-  
-  .section-configuracion h1 {
-    text-align: center;
-  }
-  
-  .section-configuracion button {
-    display: block;
-    margin: 10px auto;
-  }
-  
-  .section-configuracion .datos-usuarios {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin-top: 20px;
-  }
-  
-  .form-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin-top: 20px;
-  }
-  
-  .wave-group {
-    position: relative;
-    margin-bottom: 20px;
-  }
-  
-  .wave-group .input {
-    font-size: 16px;
-    padding: 10px 10px 10px 5px;
-    display: block;
-    width: 200px;
-    border: none;
-    border-bottom: 1px solid #515151;
-    background: transparent;
-  }
-  
-  .wave-group .input:focus {
-    outline: none;
-  }
-  
-  .wave-group .label {
-    color: #999;
-    font-size: 18px;
-    font-weight: normal;
-    position: absolute;
-    pointer-events: none;
-    left: 5px;
-    top: 10px;
-    display: flex;
-  }
-  
-  .wave-group .label-char {
-    transition: 0.2s ease all;
-    transition-delay: calc(var(--index) * 0.05s);
-  }
-  
-  .wave-group .input:focus ~ .label .label-char,
-  .wave-group .input:valid ~ .label .label-char {
-    transform: translateY(-20px);
-    font-size: 14px;
-    color: #409E8D;
-  }
-  
+
+  .wave-group .input,
   .wave-group .bar {
-    position: relative;
-    display: block;
-    width: 200px;
+      width: 100%;
+      max-width: none;
   }
-  
-  .wave-group .bar:before, .wave-group .bar:after {
-    content: '';
-    height: 2px;
-    width: 0;
-    bottom: 1px;
-    position: absolute;
-    background: #409E8D;
-    transition: 0.2s ease all;
-    -moz-transition: 0.2s ease all;
-    -webkit-transition: 0.2s ease all;
-  }
-  
-  .wave-group .bar:before {
-    left: 50%;
-  }
-  
-  .wave-group .bar:after {
-    right: 50%;
-  }
-  
-  .wave-group .input:focus ~ .bar:before,
-  .wave-group .input:focus ~ .bar:after {
-    width: 50%;
-  }
-  
-  .bonton-config {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    max-width: 300px;
-    margin-top: 20px;
-  }
-  
-  .bonton-config button {
-    padding: 10px 20px;
-    font-size: 16px;
-  }
-  
+}

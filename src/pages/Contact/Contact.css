@@ -1,0 +1,139 @@
+/* src/pages/Contact/contact.css */
+
+/* Estilos generales */
+.contact-hero {
+    background-image: url('../../assets/images/fondo-contact.jpg'); /* Cambia la URL según tu imagen de fondo */
+    height: 300px;
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 50px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #24262b;
+    text-shadow: 1px 1px 2px #ffffff;
+    box-sizing: border-box;
+}
+
+.contact-hero h1 {
+    font-size: 50px;
+    margin: 0;
+    text-align: center;
+}
+
+.contact-hero p {
+    font-size: 20px;
+    margin: 20px 0 0 0;
+    text-align: center;
+}
+
+.contact-content {
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+    box-sizing: border-box;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.team-member {
+    background: #f9f9f9;
+    border-radius: 10px;
+    padding: 20px;
+    width: 100%;
+    max-width: 800px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-sizing: border-box;
+}
+
+.team-member.reverse {
+    flex-direction: row-reverse;
+}
+
+.team-member h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.team-member p {
+    font-size: 18px;
+    margin: 5px 0;
+}
+
+.team-member a {
+    color: #409E8D;
+    text-decoration: none;
+}
+
+.team-member a:hover {
+    text-decoration: underline;
+}
+
+.member-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+/* Media queries para responsividad */
+@media (max-width: 900px) {
+    .contact-hero h1 {
+        font-size: 35px;
+    }
+
+    .contact-hero p {
+        font-size: 18px;
+    }
+
+    .team-member {
+        flex-direction: column;
+    }
+
+    .team-member h2 {
+        font-size: 24px;
+    }
+
+    .team-member p {
+        font-size: 16px;
+    }
+
+    .member-photo {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+@media (max-width: 660px) {
+    .contact-hero {
+        padding: 20px;
+    }
+
+    .contact-hero h1 {
+        font-size: 28px;
+    }
+
+    .contact-hero p {
+        font-size: 16px;
+    }
+
+    .team-member h2 {
+        font-size: 20px;
+    }
+
+    .team-member p {
+        font-size: 14px;
+    }
+
+    .member-photo {
+        width: 80px;
+        height: 80px;
+    }
+}

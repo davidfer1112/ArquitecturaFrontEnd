@@ -1,3 +1,4 @@
+/* Estilos para el header */
 .header {
     position: sticky;
     top: 0;
@@ -12,7 +13,7 @@
     z-index: 10;
 }
 
-#boton-logo{
+#boton-logo {
     width: 300px;
     background: transparent;
     border: none;
@@ -24,7 +25,6 @@
     padding-left: 10px;
     cursor: pointer;
 }
-
 
 .nav-botones ul {
     list-style: none;
@@ -46,15 +46,13 @@
     font-size: 16px;
 }
 
-
 .nav-botones ul li:hover {
     scale: 1.1;
-    /* transform: translateY(-2px); */
     animation: mover 1.3s infinite;
     animation-timing-function: ease-in-out;
 }
 
-.nav-botones{
+.nav-botones {
     display: flex;
     justify-content: flex-end;
     gap: 30px;
@@ -70,7 +68,6 @@
 
 .nav-botones button:hover {
     scale: 1.1;
-    /* transform: translateY(-2px); */
     animation: mover 1.3s infinite;
     animation-timing-function: ease-in-out;
 }
@@ -83,7 +80,6 @@
     50% {
         transform: translateY(-3px);
     }
-
 }
 
 .nav-botones button img {
@@ -95,29 +91,25 @@
     display: none;
 }
 
+/* Estilos para el overlay */
 .overlay {
-    background-color: rebeccapurple;
+    background-color: rgba(36, 38, 43, 0.9);
     position: fixed;
     top: 0;
     right: 0;
     width: 50%;
     height: 100%;
-    background-color: rgba(36,38,43);
-    animation: deslisar 1s ease-in-out ;
+    animation: deslisar 1s ease-in-out;
+    z-index: 20; /* Asegúrate de que el overlay esté por encima de otros elementos */
 }
-
-
-
 
 @keyframes deslisar {
     0% {
-        transform: translatex(100%);
+        transform: translateX(100%);
     }
-
     50% {
-        transform: translatex(0px);
+        transform: translateX(0px);
     }
-
 }
 
 .overlay ul {
@@ -140,62 +132,64 @@
     border: none;
     cursor: pointer;
     transition-duration: 0.5s;
-    background-color: #24262b;
+    background-color: #24262b00;
 }
 
 .overlay button:hover {
     scale: 1.1;
-    /* transform: translateY(-2px); */
     animation: mover 1.3s infinite;
     animation-timing-function: ease-in-out;
 }
 
-
 .overlay ul {
     list-style: none;
-    display: flex;
-    gap: 30px;
     padding-inline-start: 0;
 }
 
 .overlay ul li a {
     text-decoration: none;
-    color: #409E8D;
+    color: #ffffff; /* Cambia el color a blanco */
     transition-duration: 0.5s;
+}
+
+.overlay ul li button {
+    text-decoration: none;
+    color: #ffffff; /* Cambia el color a blanco */
+    transition-duration: 0.5s;
+    font-size: 16px;
 }
 
 .overlay ul li:hover {
     scale: 1.1;
-    /* transform: translateY(-2px); */
     animation: mover 1.3s infinite;
     animation-timing-function: ease-in-out;
 }
 
-
+/* Media queries */
 @media screen and (max-width: 768px) {
     .header {
-        grid-template-columns: 1fr; 
-        justify-items: center; 
-        padding: 10px 5px; 
+        grid-template-columns: 1fr;
+        justify-items: center;
+        padding: 10px 5px;
     }
 
     .header .logo {
-        width: 150px; 
-        padding-left: 0; 
+        width: 150px;
+        padding-left: 0;
     }
 
     .nav-botones {
-        justify-content: center; 
-        padding-right: 5px; 
+        justify-content: center;
+        padding-right: 5px;
     }
 
     .nav-botones ul {
-        flex-direction: column; 
-        gap: 15px; 
+        flex-direction: column;
+        gap: 15px;
     }
 
     .nav-botones button img {
-        height: 25px; 
+        height: 25px;
     }
 
     .nav-botones ul {

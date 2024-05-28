@@ -81,6 +81,13 @@ ul{
 	color: #ffffff;
 	transition: all 0.5s ease;
 }
+
+.footer-col .social-links a img {
+    max-width: 50px;
+    max-height: 50px;
+    border-radius: 50%;
+}
+
 .footer-col .social-links a:hover{
 	color: #24262b;
 	background-color: #ffffff;

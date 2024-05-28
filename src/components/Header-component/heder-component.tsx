@@ -27,11 +27,12 @@ const Header = () => {
 
     const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
-    const irAProductos = () => navigate('/Productos');
+    const irAProductos = () => navigate('/productos');
     const irAHome = () => navigate('/');
     const irAConfiguracion = () => navigate('/configuracion');
     const irACarrito = () => navigate('/carrito');
-    const irAAbout = () => navigate('/about'); // Añadir el manejador de navegación para About
+    const irAAbout = () => navigate('/about');
+    const irAContact = () => navigate('/contact'); // Añadir el manejador de navegación para Contact
 
     const verificarUsuario = async () => {
         if (!session || !session.info || !session.info.webId) {
@@ -65,7 +66,7 @@ const Header = () => {
                 <ul>
                     <li><button onClick={irAProductos}>Ver Productos</button></li>
                     <li><button onClick={irAAbout}>About</button></li> {/* Actualizar el enlace About */}
-                    <li><button onClick={() => navigate('/contact')}>Contact</button></li> {/* Actualizar el enlace Contact */}
+                    <li><button onClick={irAContact}>Contact</button></li> {/* Actualizar el enlace Contact */}
                 </ul>
                 {isLoggedIn ? (
                     <React.Fragment>
@@ -89,7 +90,7 @@ const Header = () => {
                         <SessionProvider sessionId="some-id">
                             <LoginButton
                                 oidcIssuer="https://solidcommunity.net/"
-                                redirectUrl={window.location.origin + "/Productos"}
+                                redirectUrl={window.location.origin + "/productos"}
                                 onError={console.error}
                             >
                                 <img src={User} alt="user" />
@@ -109,7 +110,7 @@ const Header = () => {
                     <ul>
                         <li><button onClick={irAProductos}>Productos</button></li>
                         <li><button onClick={irAAbout}>About</button></li> {/* Actualizar el enlace About */}
-                        <li><button onClick={() => navigate('/contact')}>Contact</button></li> {/* Actualizar el enlace Contact */}
+                        <li><button onClick={irAContact}>Contact</button></li> {/* Actualizar el enlace Contact */}
                     </ul>
                 </div>
             )}

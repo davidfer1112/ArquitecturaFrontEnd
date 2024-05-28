@@ -1,4 +1,3 @@
-// Configuracion.tsx
 import React, { useState, useEffect } from 'react';
 import { useSession } from "@inrupt/solid-ui-react";
 import toast, { Toaster } from 'react-hot-toast';
@@ -9,6 +8,7 @@ import {
 import { UserDataModel } from '../../models/UserDataModel';
 import Header from "../../components/Header-component/heder-component";
 import Footer from '../../components/Footer-component/footer-component';
+import { Player } from '@lottiefiles/react-lottie-player';
 import "./Configuracion.css";
 
 const Configuracion = () => {
@@ -81,6 +81,13 @@ const Configuracion = () => {
 
       <section className="section-configuracion">
         <h1>Configuración del Usuario</h1>
+
+        <Player
+          autoplay
+          loop
+          src="https://lottie.host/e615e938-b60c-4538-92a1-44ac8be8f988/bHT44qDO1H.json"
+          style={{ height: '200px', width: '200px' }}
+        />
 
         {isEmptyData && !editing && (
           <div className="user-info">

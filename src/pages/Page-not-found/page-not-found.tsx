@@ -1,8 +1,18 @@
-// import React from 'react'
 
+import { useNavigate } from 'react-router-dom';
 import './page-not-found.css';
 
 function Error404() {
+  const navigate = useNavigate();
+
+  const handleBack = () => {
+    navigate(-1); // Esto te lleva a la página anterior en el historial
+  };
+
+  const handleWelcome = () => {
+    navigate('/'); // Esto te lleva a la página de inicio
+  };
+
   return (
     <div className="fondo">
       <div className="top">
@@ -28,12 +38,12 @@ function Error404() {
       <div className="boton">
         <p>¡Oh no! Parece que este fantasma asustó a la página que estabas buscando.</p>
         <div className="botones">
-          <button className="btn">Atras</button>
-          <button className="btn">Welcome</button>
+          <button className="btn" onClick={handleBack}>Atras</button>
+          <button className="btn" onClick={handleWelcome}>Welcome</button>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Error404
+export default Error404;

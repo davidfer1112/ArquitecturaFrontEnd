@@ -28,7 +28,7 @@ const About = () => {
                     <Player
                         autoplay
                         loop
-                        src="https://lottie.host/4d79fcd7-104e-4b44-b4c9-9c2f58d73252/lLCO9gBoVQ.json"
+                        src="https://lottie.host/2741f6b0-d52d-434f-8548-c7a0530c421f/6BOulS0vPz.json"
                         style={{ height: '300px', width: '300px' }}
                     />
                     <div className="text-content">
@@ -44,7 +44,7 @@ const About = () => {
                     <Player
                         autoplay
                         loop
-                        src="https://lottie.host/67bd8493-7ab1-4d5a-989b-52d295f04d36/w5fUWFgr51.json"
+                        src="https://lottie.host/08b420ef-e1d6-4d61-bd51-42ca5d5ab288/z8YwsGb8CA.json"
                         style={{ height: '300px', width: '300px' }}
                     />
                 </div>

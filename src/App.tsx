@@ -8,6 +8,7 @@ import Configuracion from './pages/Configuracion/Configuracion.jsx';
 import Carrito from './pages/Carrito/Carrito.tsx';
 import ConfirmarPago from './pages/ConfirmarPago/ConfirmarPago.tsx';
 import About from './pages/About/About.tsx';
+import Contact from './pages/Contact/Contact';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path='/carrito' element={<Carrito/>}/>
           <Route path="/confirmar-pago" element={<ConfirmarPago />} />
           <Route path='/about' element={<About />} /> {/* Definir la ruta /about */}
+          <Route path='/contact' element={<Contact />} />
         </Routes>
       </BrowserRouter>
     </div>
